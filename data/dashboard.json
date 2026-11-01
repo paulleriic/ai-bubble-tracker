@@ -8,6 +8,8 @@
    "name": "Leaders qui encaissent",
    "platform": "Trade Republic",
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
+   "kind": "strategy",
+   "start": "2026-10-30",
    "value": 10000.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
@@ -18,6 +20,8 @@
    "name": "Pelles & pioches (PEA)",
    "platform": "Trade Republic (PEA)",
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
+   "kind": "strategy",
+   "start": "2026-10-30",
    "value": 10000.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
@@ -28,6 +32,8 @@
    "name": "Pair trade Nvidia / CoreWeave",
    "platform": "Axi (CFD)",
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
+   "kind": "strategy",
+   "start": "2026-10-30",
    "value": 10000.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
@@ -38,6 +44,8 @@
    "name": "Leaders + couverture NAS100",
    "platform": "Trade Republic + Axi",
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
+   "kind": "strategy",
+   "start": "2026-10-30",
    "value": 10000.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
@@ -47,11 +55,123 @@
    "id": "paliers",
    "name": "Leaders achetés par paliers",
    "platform": "Trade Republic",
-   "thesis": "3 achats égaux sur 2 mois : on renonce au meilleur prix pour éviter le pire timing.",
+   "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
+   "kind": "strategy",
+   "start": "2026-10-30",
    "value": 10000.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
    "max_drawdown": 0.0
+  },
+  {
+   "id": "bench_world",
+   "name": "ETF MSCI World",
+   "platform": "Repère",
+   "thesis": "",
+   "kind": "benchmark",
+   "start": "2026-10-30",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  },
+  {
+   "id": "bench_ndx",
+   "name": "Nasdaq-100",
+   "platform": "Repère",
+   "thesis": "",
+   "kind": "benchmark",
+   "start": "2026-10-30",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  }
+ ],
+ "backtest": [
+  {
+   "id": "leaders",
+   "name": "Leaders qui encaissent",
+   "platform": "Trade Republic",
+   "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
+   "kind": "strategy",
+   "start": "2026-07-31",
+   "value": 10148.38,
+   "pnl": 148.38,
+   "pnl_pct": 0.01484,
+   "max_drawdown": -0.12335
+  },
+  {
+   "id": "pelles",
+   "name": "Pelles & pioches (PEA)",
+   "platform": "Trade Republic (PEA)",
+   "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
+   "kind": "strategy",
+   "start": "2026-07-31",
+   "value": 9160.68,
+   "pnl": -839.32,
+   "pnl_pct": -0.08393,
+   "max_drawdown": -0.19273
+  },
+  {
+   "id": "pair",
+   "name": "Pair trade Nvidia / CoreWeave",
+   "platform": "Axi (CFD)",
+   "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
+   "kind": "strategy",
+   "start": "2026-07-31",
+   "value": 11390.03,
+   "pnl": 1390.03,
+   "pnl_pct": 0.139,
+   "max_drawdown": -0.13736
+  },
+  {
+   "id": "hedged",
+   "name": "Leaders + couverture NAS100",
+   "platform": "Trade Republic + Axi",
+   "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
+   "kind": "strategy",
+   "start": "2026-07-31",
+   "value": 10010.37,
+   "pnl": 10.37,
+   "pnl_pct": 0.00104,
+   "max_drawdown": -0.09311
+  },
+  {
+   "id": "paliers",
+   "name": "Leaders achetés par paliers",
+   "platform": "Trade Republic",
+   "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
+   "kind": "strategy",
+   "start": "2026-07-31",
+   "value": 9688.92,
+   "pnl": -311.08,
+   "pnl_pct": -0.03111,
+   "max_drawdown": -0.12479
+  },
+  {
+   "id": "bench_world",
+   "name": "ETF MSCI World",
+   "platform": "Repère",
+   "thesis": "",
+   "kind": "benchmark",
+   "start": "2026-07-31",
+   "value": 10369.03,
+   "pnl": 369.03,
+   "pnl_pct": 0.0369,
+   "max_drawdown": -0.03535
+  },
+  {
+   "id": "bench_ndx",
+   "name": "Nasdaq-100",
+   "platform": "Repère",
+   "thesis": "",
+   "kind": "benchmark",
+   "start": "2026-07-31",
+   "value": 10345.01,
+   "pnl": 345.01,
+   "pnl_pct": 0.0345,
+   "max_drawdown": -0.08816
   }
  ],
  "alerts": [
@@ -61,7 +181,9 @@
    "value": 350,
    "action": "Renforcer la couverture NAS100 et le short CoreWeave",
    "current": 288.0,
-   "triggered": false
+   "as_of": "2026-10-15",
+   "triggered": false,
+   "id": "CDS 5 ans Oracle > 350"
   },
   {
    "indicator": "CDS 5 ans Oracle",
@@ -69,7 +191,9 @@
    "value": 220,
    "action": "Alléger la couverture, renforcer le cœur",
    "current": 288.0,
-   "triggered": false
+   "as_of": "2026-10-15",
+   "triggered": false,
+   "id": "CDS 5 ans Oracle < 220"
   },
   {
    "indicator": "CDS 5 ans CoreWeave",
@@ -77,7 +201,9 @@
    "value": 1200,
    "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)",
    "current": 1000.0,
-   "triggered": false
+   "as_of": "2026-10-15",
+   "triggered": false,
+   "id": "CDS 5 ans CoreWeave > 1200"
   },
   {
    "indicator": "Proba hausse Fed 9 déc.",
@@ -85,15 +211,19 @@
    "value": 80,
    "action": "Prudence sur les valeurs de croissance (effet duration)",
    "current": 71.0,
-   "triggered": false
+   "as_of": "2026-10-30",
+   "triggered": false,
+   "id": "Proba hausse Fed 9 déc. > 80"
   },
   {
-   "indicator": "Pair trade (P&L / capital)",
+   "indicator": "Pair trade (perte / capital)",
    "op": "<",
    "value": -0.1,
    "current": 0.0,
+   "as_of": "2026-10-30",
    "triggered": false,
-   "action": "Stop-loss : couper le pair trade"
+   "action": "Stop-loss : couper le pair trade",
+   "id": "Pair trade (perte / capital) < -0.1"
   }
  ],
  "events": [
@@ -118,7 +248,7 @@
    "label": "Échéance mensuelle des options"
   },
   {
-   "date": "2026-12-01",
+   "date": "2026-11-30",
    "label": "2e palier d'achat (stratégie paliers)"
   },
   {
@@ -130,7 +260,7 @@
    "label": "Résultats Broadcom + décision de la Fed"
   },
   {
-   "date": "2027-01-04",
+   "date": "2026-12-30",
    "label": "3e palier d'achat (stratégie paliers)"
   }
  ]

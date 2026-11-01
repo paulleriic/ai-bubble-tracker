@@ -1,19 +1,66 @@
 {
   "rules": [
-    {"indicator": "CDS 5 ans Oracle", "op": ">", "value": 350, "action": "Renforcer la couverture NAS100 et le short CoreWeave"},
-    {"indicator": "CDS 5 ans Oracle", "op": "<", "value": 220, "action": "Alléger la couverture, renforcer le cœur"},
-    {"indicator": "CDS 5 ans CoreWeave", "op": ">", "value": 1200, "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)"},
-    {"indicator": "Proba hausse Fed 9 déc.", "op": ">", "value": 80, "action": "Prudence sur les valeurs de croissance (effet duration)"}
+    {
+      "indicator": "CDS 5 ans Oracle",
+      "op": ">",
+      "value": 350,
+      "action": "Renforcer la couverture NAS100 et le short CoreWeave"
+    },
+    {
+      "indicator": "CDS 5 ans Oracle",
+      "op": "<",
+      "value": 220,
+      "action": "Alléger la couverture, renforcer le cœur"
+    },
+    {
+      "indicator": "CDS 5 ans CoreWeave",
+      "op": ">",
+      "value": 1200,
+      "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)"
+    },
+    {
+      "indicator": "Proba hausse Fed 9 déc.",
+      "op": ">",
+      "value": 80,
+      "action": "Prudence sur les valeurs de croissance (effet duration)"
+    }
   ],
   "events": [
-    {"date": "2026-11-02", "label": "Résultats Palantir"},
-    {"date": "2026-11-03", "label": "Résultats AMD"},
-    {"date": "2026-11-16", "label": "Date limite des 13F (positions des fonds)"},
-    {"date": "2026-11-17", "label": "Résultats Nvidia"},
-    {"date": "2026-11-20", "label": "Échéance mensuelle des options"},
-    {"date": "2026-12-01", "label": "2e palier d'achat (stratégie paliers)"},
-    {"date": "2026-12-08", "label": "Résultats Oracle"},
-    {"date": "2026-12-09", "label": "Résultats Broadcom + décision de la Fed"},
-    {"date": "2027-01-04", "label": "3e palier d'achat (stratégie paliers)"}
+    {
+      "date": "2026-11-02",
+      "label": "Résultats Palantir"
+    },
+    {
+      "date": "2026-11-03",
+      "label": "Résultats AMD"
+    },
+    {
+      "date": "2026-11-16",
+      "label": "Date limite des 13F (positions des fonds)"
+    },
+    {
+      "date": "2026-11-17",
+      "label": "Résultats Nvidia"
+    },
+    {
+      "date": "2026-11-20",
+      "label": "Échéance mensuelle des options"
+    },
+    {
+      "date": "2026-11-30",
+      "label": "2e palier d'achat (stratégie paliers)"
+    },
+    {
+      "date": "2026-12-08",
+      "label": "Résultats Oracle"
+    },
+    {
+      "date": "2026-12-09",
+      "label": "Résultats Broadcom + décision de la Fed"
+    },
+    {
+      "date": "2026-12-30",
+      "label": "3e palier d'achat (stratégie paliers)"
+    }
   ]
 }

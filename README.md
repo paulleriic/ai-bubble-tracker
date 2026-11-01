@@ -24,7 +24,9 @@ Lancer à la main : onglet **Actions** → « Mise à jour quotidienne des cours
 | `pelles` | Pelles & pioches | Trade Republic (PEA) | 25 % Schneider, Siemens Energy, Legrand, ASML |
 | `pair` | Pair trade Nvidia / CoreWeave | Axi (CFD) | long 10 000 € NVDA, short 5 000 € CRWV, financement estimé 6,5 % / 2 % par an |
 | `hedged` | Leaders + couverture | TR + Axi | `leaders` + short Nasdaq-100 sur 40 % |
-| `paliers` | Leaders par paliers | Trade Republic | 3 achats : 30/10, 01/12, 04/01 |
+| `paliers` | Leaders par paliers | Trade Republic | 3 achats à 1 mois d'intervalle : 30/10, 30/11, 30/12 |
+
+Un **rétro-test** depuis le 31/07/2026 applique les mêmes règles sur les 3 mois précédents (dont la baisse d'octobre).
 
 Repères : ETF MSCI World (URTH) et Nasdaq-100, convertis en euros.
 
@@ -34,3 +36,8 @@ Repères : ETF MSCI World (URTH) et Nasdaq-100, convertis en euros.
 - Changer une stratégie (poids, ratio de couverture, frais) : `config/strategies.json`
 - Seuils d'alerte et calendrier : `config/thresholds.json`
 - Ajouter un relevé de CDS : une ligne dans `data/signals.csv`
+
+## Tableau de bord et newsletter
+
+- Tableau de bord interactif (privé, sur Claude) : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf. Le code de la page est dans `dashboard/index.html`.
+- La tâche planifiée Claude qui le met à jour et rédige la newsletter du lundi suit `ROUTINE.md`.

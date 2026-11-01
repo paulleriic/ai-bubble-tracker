@@ -1,0 +1,569 @@
+<meta name="dash-one-writer">
+<style>
+.ab { font-family: var(--font-anthropic-sans); display: grid; gap: var(--cds-gap-lg); }
+.ab-head { display: grid; gap: var(--cds-gap-xs); }
+.ab-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+.ab-lede { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); }
+.ab-lede b { font-weight: 600; color: var(--color-fg); }
+.ab-tabs { display: flex; gap: var(--cds-gap-xs); flex-wrap: wrap; border-bottom: 1px solid var(--color-border-line); }
+.ab-tab { font: inherit; background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
+.ab-tab[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); }
+.ab-tab:focus-visible, .ab-seg button:focus-visible, .ab-th:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.ab-sec { display: grid; gap: var(--cds-gap-md); }
+.ab-bar { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; justify-content: space-between; }
+.ab-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; }
+.ab-seg button { font: inherit; font-size: var(--cds-font-size-caption); background: none; border: 0; padding: var(--cds-pad-xs) var(--cds-pad-sm); color: var(--color-fg-muted); cursor: pointer; }
+.ab-seg button[aria-pressed="true"] { background: var(--color-panel); color: var(--color-fg); font-weight: 600; }
+.ab-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.ab-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.ab-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.ab-card h2, .ab-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.ab-tiles { display: grid; gap: var(--cds-gap-sm); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+.ab-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.ab-tile .n { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ab-tile .v { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.ab-tile .s { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; color: var(--color-fg-muted); }
+.ab-tile .t { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.35; }
+.ab-tile.bench { background: none; border-style: dashed; }
+.ab .up { color: var(--color-ok); } .ab .down { color: var(--color-bad); }
+.ab-chart { position: relative; min-height: 300px; }
+.ab-chart.sm { min-height: 140px; }
+.ab-chart svg { display: block; overflow: visible; }
+.ab-chart text { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+.ab-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; z-index: 2; }
+.ab-tip .d { color: var(--cds-text-secondary); }
+.ab-tip .r { display: flex; gap: 6px; align-items: center; }
+.ab-sw { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
+.ab-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-sm); font-size: var(--cds-font-size-caption); }
+.ab-legend button { font: inherit; background: none; border: 0; padding: 2px 0; display: inline-flex; gap: 6px; align-items: center; color: var(--color-fg); cursor: pointer; }
+.ab-legend button[aria-pressed="false"] { opacity: .4; }
+.ab-twrap { max-height: 32rem; overflow: auto; }
+.ab-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ab-table th { position: sticky; top: 0; background: var(--color-panel); text-align: right; font-weight: 500; color: var(--color-fg-muted); padding: 0; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.ab-table th:nth-child(-n+3) { text-align: left; }
+.ab-th { font: inherit; color: inherit; background: none; border: 0; padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; width: 100%; text-align: inherit; }
+.ab-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.ab-table td:nth-child(-n+3) { text-align: left; }
+.ab-table tbody tr { cursor: pointer; }
+.ab-table tbody tr.sel td:first-child { box-shadow: inset 3px 0 0 var(--color-fg); }
+.ab-table .hide-n { }
+@media (max-width: 640px) { .ab-table .hide-n { display: none; } }
+.ab-input { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); }
+.ab-alerts { display: grid; gap: var(--cds-gap-xs); }
+.ab-alert { display: grid; grid-template-columns: auto 1fr; gap: 2px var(--cds-gap-sm); padding: var(--cds-pad-sm) 0; border-bottom: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
+.ab-pill { grid-row: span 2; align-self: start; border-radius: 999px; padding: 1px 8px; font-weight: 600; border: 1px solid currentColor; }
+.ab-pill.on { color: var(--color-bad); } .ab-pill.off { color: var(--color-ok); }
+.ab-alert .a { color: var(--color-fg-muted); }
+.ab-events { display: grid; gap: 0; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ab-ev { display: grid; grid-template-columns: 5.5rem 1fr auto; gap: var(--cds-gap-sm); padding: var(--cds-pad-xs) 0; border-bottom: 1px solid var(--color-border-line); }
+.ab-ev.past { opacity: .45; }
+.ab-ev .c { color: var(--color-fg-muted); }
+.ab-mini { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+.ab-mini h3 { font-size: var(--cds-font-size-caption); font-weight: 500; color: var(--color-fg-muted); margin: 0; }
+.ab-src a { color: inherit; }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.ab-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.ab-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+</style>
+
+<div class="ab">
+  <header class="ab-head">
+    <h1 class="ab-title">AI Bubble Tracker</h1>
+    <p class="ab-lede">Cours au <b data-draw="asof" data-source="prices">—</b>. Alertes déclenchées : <b data-draw="nalerts" data-source="alerts">—</b>. Prochain rendez-vous : <b data-draw="nextev" data-source="events">—</b>.</p>
+  </header>
+
+  <nav class="ab-tabs" role="tablist" aria-label="Vues">
+    <button class="ab-tab" role="tab" data-tab="strategies" aria-selected="true">Stratégies</button>
+    <button class="ab-tab" role="tab" data-tab="cours" aria-selected="false">Cours</button>
+    <button class="ab-tab" role="tab" data-tab="signaux" aria-selected="false">Signaux et calendrier</button>
+  </nav>
+
+  <section class="ab-sec" id="strategies" data-page="strategies">
+    <div class="ab-bar">
+      <div class="ab-seg" role="group" aria-label="Période de calcul">
+        <button type="button" data-mode="live" aria-pressed="false">Suivi réel</button>
+        <button type="button" data-mode="backtest" aria-pressed="false">Rétro-test 3 mois</button>
+      </div>
+      <p class="ab-note">Portefeuilles fictifs de 10 000 € chacun, en euros. Départ le <b data-draw="mstart" data-source="strategy_stats">—</b>.</p>
+    </div>
+    <div class="ab-tiles" id="tiles" data-draw="tiles" data-source="strategy_stats"></div>
+
+    <div class="ab-card" id="valeur">
+      <h2>Valeur des stratégies</h2>
+      <p class="ab-note">En euros, face à deux repères (pointillés). Clique sur la légende pour masquer une courbe.</p>
+      <div class="ab-chart" data-draw="stratchart" data-source="strategies"></div>
+    </div>
+
+    <div class="ab-grid">
+      <div class="ab-card" id="pair">
+        <h2>Pair trade : d'où vient le résultat</h2>
+        <p class="ab-note">Gain de la jambe achetée (Nvidia), de la jambe vendue (CoreWeave) et coût de financement estimé des CFD, en euros.</p>
+        <div class="ab-chart" data-draw="pairchart" data-source="strategies"></div>
+      </div>
+      <div class="ab-card" id="couverture">
+        <h2>Ce que coûte ou rapporte la couverture</h2>
+        <p class="ab-note">Résultat du short Nasdaq-100 (40 % du montant), et argent investi par la stratégie par paliers.</p>
+        <div class="ab-chart" data-draw="hedgechart" data-source="strategies"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-sec" id="cours" data-page="cours" hidden>
+    <div class="ab-card" id="courbes">
+      <div class="ab-bar">
+        <h2>Évolution comparée (base 100)</h2>
+        <div class="ab-seg" role="group" aria-label="Période">
+          <button type="button" data-period="21" aria-pressed="false">1 mois</button>
+          <button type="button" data-period="63" aria-pressed="false">3 mois</button>
+          <button type="button" data-period="126" aria-pressed="false">6 mois</button>
+          <button type="button" data-period="400" aria-pressed="false">1 an</button>
+        </div>
+      </div>
+      <p class="ab-note">Clique sur une ligne du tableau pour l'ajouter ou la retirer du graphique.</p>
+      <div class="ab-chart" data-draw="pricechart" data-source="prices assets"></div>
+    </div>
+    <div class="ab-card" id="tableau">
+      <div class="ab-bar">
+        <h2>Toutes les valeurs suivies</h2>
+        <input class="ab-input" id="ab-search" type="search" placeholder="Filtrer (nom, groupe…)" aria-label="Filtrer les valeurs">
+      </div>
+      <p class="ab-note">Cours dans la devise de cotation. Écart = distance au plus haut sur la période.</p>
+      <div class="ab-twrap">
+        <table class="ab-table" data-source="assets" data-row-key="ticker">
+          <thead><tr>
+            <th data-field="ticker"><button class="ab-th" data-sort="ticker">Code</button></th>
+            <th data-field="name"><button class="ab-th" data-sort="name">Nom</button></th>
+            <th data-field="group" class="hide-n"><button class="ab-th" data-sort="group">Groupe</button></th>
+            <th data-field="last"><button class="ab-th" data-sort="last">Cours</button></th>
+            <th data-field="chg_1d"><button class="ab-th" data-sort="chg_1d">1 jour</button></th>
+            <th data-field="chg_1w" class="hide-n"><button class="ab-th" data-sort="chg_1w">1 sem.</button></th>
+            <th data-field="chg_1m"><button class="ab-th" data-sort="chg_1m">1 mois</button></th>
+            <th data-field="since_start" class="hide-n"><button class="ab-th" data-sort="since_start">Depuis 30/10</button></th>
+            <th data-field="from_3m_high"><button class="ab-th" data-sort="from_3m_high">Écart 3 mois</button></th>
+            <th data-field="from_52w_high" class="hide-n"><button class="ab-th" data-sort="from_52w_high">Écart 1 an</button></th>
+          </tr></thead>
+          <tbody data-draw="assetrows" data-source="assets"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-sec" id="signaux" data-page="signaux" hidden>
+    <div class="ab-grid">
+      <div class="ab-card" id="alertes">
+        <h2>Règles d'action</h2>
+        <p class="ab-note">Seuils fixés à l'avance. Une règle déclenchée appelle l'action indiquée.</p>
+        <div class="ab-alerts" data-draw="alerts" data-source="alerts"></div>
+      </div>
+      <div class="ab-card" id="cds">
+        <h2>Tension sur le crédit IA</h2>
+        <p class="ab-note">CDS 5 ans relevés dans la presse, en points de base. Plus c'est haut, plus le marché craint un défaut.</p>
+        <div class="ab-chart sm" data-draw="cdschart" data-source="signals"></div>
+      </div>
+    </div>
+    <div class="ab-card" id="marche">
+      <h2>Thermomètres de marché, 6 mois</h2>
+      <p class="ab-note">Peur (VIX), taux longs américains, crédit à haut rendement (ETF HYG) et euro-dollar.</p>
+      <div class="ab-mini">
+        <div><h3>VIX</h3><div class="ab-chart sm" data-draw="mini" data-ticker="^VIX" data-source="prices"></div></div>
+        <div><h3>Taux US 10 ans (%)</h3><div class="ab-chart sm" data-draw="mini" data-ticker="^TNX" data-source="prices"></div></div>
+        <div><h3>ETF crédit High Yield (HYG)</h3><div class="ab-chart sm" data-draw="mini" data-ticker="HYG" data-source="prices"></div></div>
+        <div><h3>EUR/USD</h3><div class="ab-chart sm" data-draw="mini" data-ticker="EURUSD=X" data-source="prices"></div></div>
+      </div>
+    </div>
+    <div class="ab-grid">
+      <div class="ab-card" id="calendrier">
+        <h2>Calendrier</h2>
+        <div class="ab-events" data-draw="events" data-source="events"></div>
+      </div>
+      <div class="ab-card" id="releves">
+        <h2>Relevés de crédit et de la Fed</h2>
+        <p class="ab-note">Mis à jour par la newsletter du lundi.</p>
+        <div class="ab-twrap">
+          <table class="ab-table" data-source="signals" data-row-key="date,indicator">
+            <thead><tr>
+              <th data-field="date"><button class="ab-th" tabindex="-1">Date</button></th>
+              <th data-field="indicator"><button class="ab-th" tabindex="-1">Indicateur</button></th>
+              <th data-field="note" class="hide-n"><button class="ab-th" tabindex="-1">Note</button></th>
+              <th data-field="value"><button class="ab-th" tabindex="-1">Valeur</button></th>
+              <th data-field="unit"><button class="ab-th" tabindex="-1">Unité</button></th>
+            </tr></thead>
+            <tbody data-draw="sigrows" data-source="signals"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const fr = (o) => new Intl.NumberFormat('fr-FR', o);
+  const F = window.abFmt = {
+    eur: (v) => fr({ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v),
+    eurS: (v) => (v > 0 ? '+' : '') + fr({ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v),
+    pct: (v) => (v > 0 ? '+' : '') + fr({ style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(v),
+    num: (v, d = 2) => fr({ minimumFractionDigits: d, maximumFractionDigits: d }).format(v),
+    date: (s) => new Date(s + 'T00:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }),
+    dateS: (d) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', timeZone: 'UTC' }),
+    cls: (v) => (v > 0 ? 'up' : v < 0 ? 'down' : ''),
+  };
+  const ok = (id) => dash.data(id).status === 'ok';
+  const rows = (id) => (ok(id) ? dash.data(id).data : []);
+  const fail = (el, id) => {
+    const s = dash.data(id).status;
+    if (s === 'error' || s === 'connect' || s === 'declined') { const d = document.createElement('div'); d.className = 'ab-fail'; d.textContent = 'Failed to load'; el.replaceChildren(d); return true; }
+    if (s !== 'ok') { el.replaceChildren(); el.classList.add('dash-skeleton'); return true; }
+    el.classList.remove('dash-skeleton');
+    return false;
+  };
+  window.abU = { ok, rows, fail };
+
+  // Mode : suivi réel s'il a au moins 10 jours, sinon rétro-test
+  const mode = () => {
+    const p = dash.params().mode;
+    if (p) return p;
+    const live = rows('strategies').filter((r) => r.mode === 'live').length;
+    return live >= 10 ? 'live' : 'backtest';
+  };
+  window.abMode = mode;
+  const NAMES = { leaders: 'Leaders qui encaissent', pelles: 'Pelles & pioches', pair: 'Pair trade NVDA/CRWV', hedged: 'Leaders + couverture', paliers: 'Leaders par paliers', bench_world: 'ETF MSCI World', bench_ndx: 'Nasdaq-100' };
+  window.abNames = NAMES;
+
+  // Onglets
+  const show = (name) => {
+    document.querySelectorAll('[data-page]').forEach((s) => { s.hidden = s.dataset.page !== name; });
+    document.querySelectorAll('.ab-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  };
+  document.querySelectorAll('.ab-tab').forEach((b) => b.addEventListener('click', () => { show(b.dataset.tab); dash.setLink(b.dataset.tab); }));
+  const named = location.hash.slice(1);
+  if (['strategies', 'cours', 'signaux'].includes(named)) show(named);
+
+  document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => dash.setParams({ mode: b.dataset.mode })));
+  document.querySelectorAll('[data-period]').forEach((b) => b.addEventListener('click', () => dash.setParams({ period: Number(b.dataset.period) })));
+  const search = document.getElementById('ab-search');
+  if (search) search.addEventListener('input', () => dash.draw('assetrows'));
+  document.querySelectorAll('[data-sort]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.sort; const cur = window.abSort || { k: 'from_3m_high', dir: 1 };
+    window.abSort = { k, dir: cur.k === k ? -cur.dir : (['ticker', 'name', 'group'].includes(k) ? 1 : -1) };
+    document.querySelectorAll('.ab-table th').forEach((th) => th.removeAttribute('aria-sort'));
+    b.closest('th').setAttribute('aria-sort', window.abSort.dir > 0 ? 'ascending' : 'descending');
+    dash.draw('assetrows');
+  }));
+  document.querySelectorAll('tbody[data-draw="assetrows"]').forEach((tb) => tb.addEventListener('click', (e) => {
+    const tr = e.target.closest('tr[data-key]'); if (!tr) return;
+    const cur = dash.params().tickers || window.abDefaultTickers;
+    const t = tr.dataset.key;
+    const next = cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t].slice(-8);
+    dash.setParams({ tickers: next });
+  }));
+
+  dash.onData(() => {
+    const m = mode();
+    document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+    const per = dash.params().period || 126;
+    document.querySelectorAll('[data-period]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.period) === per)));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.abFmt, U = window.abU;
+
+  // Graphique en lignes générique
+  window.abLine = function (el, opt) {
+    const { series, height = 300, yFmt = (v) => v, tipFmt = yFmt, refY = null } = opt;
+    el.replaceChildren();
+    const W = Math.max(el.clientWidth, 260);
+    const all = series.flatMap((s) => s.values.map((p) => p[1])).filter((v) => v != null && isFinite(v));
+    const dates = series.flatMap((s) => s.values.map((p) => p[0]));
+    if (!all.length) return;
+    let [lo, hi] = d3.extent(refY == null ? all : all.concat([refY]));
+    if (lo === hi) { lo -= 1; hi += 1; }
+    const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+    const y = d3.scaleLinear([lo, hi], [height - 22, 6]).nice(5);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', height).attr('viewBox', `0 0 ${W} ${height}`);
+    const yAx = svg.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(yFmt).tickSize(0)).attr('font-size', null).attr('font-family', null);
+    yAx.select('.domain').remove();
+    let ml = 0; yAx.selectAll('text').each(function () { ml = Math.max(ml, this.getComputedTextLength()); });
+    ml += 10;
+    yAx.attr('transform', `translate(${ml - 6},0)`);
+    const x = d3.scaleUtc(d3.extent(dates), [ml, W - 8]);
+    svg.insert('g', ':first-child').selectAll('line').data(y.ticks(5)).join('line')
+      .attr('x1', ml).attr('x2', W - 8).attr('y1', (d) => y(d)).attr('y2', (d) => y(d))
+      .attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+    const nT = Math.max(2, Math.min(6, Math.floor((W - ml) / 90)));
+    const xAx = svg.append('g').attr('transform', `translate(0,${height - 22})`)
+      .call(d3.axisBottom(x).ticks(nT).tickFormat((d) => F.dateS(d)).tickSize(0).tickPadding(8)).attr('font-size', null).attr('font-family', null);
+    xAx.select('.domain').attr('stroke', 'var(--cds-chart-axis)');
+    if (refY != null) svg.append('line').attr('x1', ml).attr('x2', W - 8).attr('y1', y(refY)).attr('y2', y(refY))
+      .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    const line = d3.line().defined((p) => p[1] != null && isFinite(p[1])).x((p) => x(p[0])).y((p) => y(p[1]));
+    series.forEach((s) => {
+      if (s.values.length === 1) {
+        svg.append('circle').attr('cx', x(s.values[0][0])).attr('cy', y(s.values[0][1])).attr('r', 3).attr('fill', s.color);
+      }
+      svg.append('path').attr('d', line(s.values)).attr('fill', 'none').attr('stroke', s.color)
+        .attr('stroke-width', s.width || 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+        .attr('stroke-dasharray', s.dash || null);
+      if (s.dots) svg.append('g').selectAll('circle').data(s.values).join('circle')
+        .attr('cx', (p) => x(p[0])).attr('cy', (p) => y(p[1])).attr('r', 3).attr('fill', s.color);
+    });
+    // Infobulle
+    const tip = document.createElement('div'); tip.className = 'ab-tip'; tip.hidden = true; el.appendChild(tip);
+    const rule = svg.append('line').attr('y1', 6).attr('y2', height - 22).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
+    const dots = svg.append('g');
+    const uniq = [...new Set(dates.map((d) => +d))].sort((a, b) => a - b);
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - 8 - ml).attr('height', height).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev);
+        const t = +x.invert(mx);
+        const i = d3.bisectCenter(uniq, t); const dt = uniq[i];
+        rule.attr('x1', x(dt)).attr('x2', x(dt)).attr('opacity', 1);
+        const pts = series.map((s) => ({ s, p: s.values.find((p) => +p[0] === dt) })).filter((o) => o.p && o.p[1] != null);
+        dots.selectAll('circle').data(pts).join('circle').attr('cx', x(dt)).attr('cy', (o) => y(o.p[1])).attr('r', 3.5).attr('fill', (o) => o.s.color);
+        tip.replaceChildren();
+        const h = document.createElement('div'); h.className = 'd'; h.textContent = F.date(new Date(dt).toISOString().slice(0, 10)); tip.appendChild(h);
+        pts.sort((a, b) => b.p[1] - a.p[1]).forEach((o) => {
+          const r = document.createElement('div'); r.className = 'r';
+          if (series.length > 1) { const sw = document.createElement('span'); sw.className = 'ab-sw'; sw.style.background = o.s.color; r.appendChild(sw); }
+          const n = document.createElement('span'); n.textContent = (series.length > 1 ? o.s.name + ' ' : '') + tipFmt(o.p[1]); r.appendChild(n);
+          tip.appendChild(r);
+        });
+        tip.hidden = false;
+        const tw = tip.offsetWidth; let left = x(dt) + 12; if (left + tw > W) left = x(dt) - tw - 12;
+        tip.style.left = Math.max(0, left) + 'px'; tip.style.top = '8px';
+      })
+      .on('pointerleave', () => { tip.hidden = true; rule.attr('opacity', 0); dots.selectAll('circle').remove(); });
+  };
+
+  window.abLegend = function (el, items, hidden, onToggle) {
+    const box = document.createElement('div'); box.className = 'ab-legend';
+    items.forEach((it) => {
+      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(!hidden.has(it.key)));
+      const sw = document.createElement('span'); sw.className = 'ab-sw'; sw.style.background = it.color; b.appendChild(sw);
+      const t = document.createElement('span'); t.textContent = it.name; b.appendChild(t);
+      b.addEventListener('click', () => onToggle(it.key)); box.appendChild(b);
+    });
+    el.appendChild(box);
+  };
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.abFmt, U = window.abU, N = window.abNames, CAP = 10000;
+  const stats = () => U.rows('strategy_stats').filter((r) => r.mode === window.abMode());
+
+  dash.draw('asof', (el) => {
+    if (!U.ok('prices')) { el.textContent = '—'; return; }
+    el.textContent = F.date(d3.max(U.rows('prices'), (r) => r.date));
+  });
+  dash.draw('mstart', (el) => { const s = stats(); el.textContent = s.length ? F.date(s[0].start) : '—'; });
+  dash.draw('nalerts', (el) => { if (!U.ok('alerts')) { el.textContent = '—'; return; } el.textContent = String(U.rows('alerts').filter((a) => a.triggered).length) + ' sur ' + U.rows('alerts').length; });
+  dash.draw('nextev', (el) => {
+    if (!U.ok('events')) { el.textContent = '—'; return; }
+    const today = new Date().toISOString().slice(0, 10);
+    const e = U.rows('events').filter((r) => r.date >= today).sort((a, b) => a.date.localeCompare(b.date))[0];
+    el.textContent = e ? e.label + ', ' + F.date(e.date) : 'aucun';
+  });
+
+  dash.draw('tiles', (el) => {
+    if (U.fail(el, 'strategy_stats')) return;
+    const m = window.abMode();
+    el.replaceChildren();
+    stats().forEach((s) => {
+      const where = `mode=${m}&id=${s.id}`;
+      const t = document.createElement('div'); t.className = 'ab-tile' + (s.kind === 'benchmark' ? ' bench' : '');
+      const n = document.createElement('div'); n.className = 'n'; n.textContent = s.name + ' · ' + s.platform; t.appendChild(n);
+      const v = document.createElement('div'); v.className = 'v ' + F.cls(s.pnl_pct); v.textContent = F.pct(s.pnl_pct);
+      v.dataset.source = 'strategy_stats'; v.dataset.field = 'pnl_pct'; v.dataset.where = where; t.appendChild(v);
+      const sub = document.createElement('div'); sub.className = 's';
+      const a = document.createElement('span'); a.textContent = F.eur(s.value); a.dataset.source = 'strategy_stats'; a.dataset.field = 'value'; a.dataset.where = where;
+      const b = document.createElement('span'); b.textContent = ' · pire baisse ' + F.pct(s.max_drawdown); b.dataset.source = 'strategy_stats'; b.dataset.field = 'max_drawdown'; b.dataset.where = where;
+      sub.append(a, b); t.appendChild(sub);
+      if (s.thesis) { const th = document.createElement('div'); th.className = 't'; th.textContent = s.thesis; th.dataset.source = 'strategy_stats'; th.dataset.field = 'thesis'; th.dataset.where = where; t.appendChild(th); }
+      el.appendChild(t);
+    });
+  });
+
+  const hidden = new Set();
+  dash.draw('stratchart', (el) => {
+    if (U.fail(el, 'strategies')) return;
+    const m = window.abMode();
+    const rs = U.rows('strategies').filter((r) => r.mode === m);
+    const keys = ['leaders', 'pelles', 'pair', 'hedged', 'paliers', 'bench_world', 'bench_ndx'];
+    const col = (k, i) => (k.startsWith('bench') ? 'var(--cds-chart-muted)' : dash.colors[i % 8]);
+    const items = keys.map((k, i) => ({ key: k, name: N[k], color: col(k, i) }));
+    const series = items.filter((it) => !hidden.has(it.key)).map((it) => ({
+      name: it.name, color: it.color, dash: it.key.startsWith('bench') ? (it.key === 'bench_ndx' ? '2 3' : '6 4') : null,
+      values: rs.map((r) => [new Date(r.date + 'T00:00:00Z'), r[it.key]]),
+    }));
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, yFmt: (v) => F.eur(v), refY: CAP });
+    window.abLegend(el, items, hidden, (k) => { hidden.has(k) ? hidden.delete(k) : hidden.add(k); dash.draw('stratchart'); });
+  });
+
+  dash.draw('pairchart', (el) => {
+    if (U.fail(el, 'strategies')) return;
+    const m = window.abMode();
+    const rs = U.rows('strategies').filter((r) => r.mode === m);
+    const d = (r) => new Date(r.date + 'T00:00:00Z');
+    const items = [
+      { key: 'pair_long_pnl', name: 'Achat Nvidia', color: dash.colors[0] },
+      { key: 'pair_short_pnl', name: 'Vente CoreWeave', color: dash.colors[1] },
+      { key: 'pair_financing', name: 'Financement', color: 'var(--cds-chart-muted)' },
+      { key: 'total', name: 'Total', color: dash.colors[2] },
+    ];
+    const series = items.map((it) => ({ name: it.name, color: it.color, width: it.key === 'total' ? 3 : 2,
+      values: rs.map((r) => [d(r), it.key === 'total' ? r.pair - CAP : r[it.key]]) }));
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, height: 260, yFmt: (v) => F.eurS(v), refY: 0 });
+    window.abLegend(el, items, new Set(), () => {});
+  });
+
+  dash.draw('hedgechart', (el) => {
+    if (U.fail(el, 'strategies')) return;
+    const m = window.abMode();
+    const rs = U.rows('strategies').filter((r) => r.mode === m);
+    const d = (r) => new Date(r.date + 'T00:00:00Z');
+    const items = [
+      { key: 'hedged_hedge_pnl', name: 'Résultat du short Nasdaq-100', color: dash.colors[3] },
+      { key: 'gap', name: 'Écart Leaders couverts – non couverts', color: dash.colors[4] },
+      { key: 'paliers_invested', name: 'Investi par paliers', color: 'var(--cds-chart-muted)' },
+    ];
+    const series = items.map((it) => ({ name: it.name, color: it.color, dash: it.key === 'paliers_invested' ? '4 3' : null,
+      values: rs.map((r) => [d(r), it.key === 'gap' ? r.hedged - r.leaders : it.key === 'paliers_invested' ? r.paliers_invested - CAP : r[it.key]]) }));
+    series[2].name = 'Cash restant à investir (négatif)';
+    items[2].name = series[2].name;
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, height: 260, yFmt: (v) => F.eurS(v), refY: 0 });
+    window.abLegend(el, items, new Set(), () => {});
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.abFmt, U = window.abU;
+  window.abDefaultTickers = ['NVDA', 'ORCL', 'CRWV', 'SU.PA', '^NDX'];
+
+  dash.draw('pricechart', (el) => {
+    if (U.fail(el, 'prices')) return;
+    const per = dash.params().period || 126;
+    const tickers = dash.params().tickers || window.abDefaultTickers;
+    const all = U.rows('prices');
+    const rs = all.slice(-Math.min(per, all.length) - 1);
+    const names = Object.fromEntries(U.rows('assets').map((a) => [a.ticker, a.name]));
+    const series = tickers.map((t, i) => {
+      const base = rs.find((r) => r[t] != null)?.[t];
+      return { name: names[t] || t, color: dash.colors[i % 8],
+        values: rs.map((r) => [new Date(r.date + 'T00:00:00Z'), r[t] != null && base ? (100 * r[t]) / base : null]) };
+    });
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, yFmt: (v) => F.num(v, 0), tipFmt: (v) => F.num(v, 1), refY: 100 });
+    window.abLegend(el, series.map((s, i) => ({ key: tickers[i], name: s.name, color: s.color })), new Set(),
+      (k) => dash.setParams({ tickers: tickers.filter((x) => x !== k) }));
+  });
+
+  dash.draw('assetrows', (tb) => {
+    tb.replaceChildren();
+    if (!U.ok('assets')) return;
+    const q = (document.getElementById('ab-search')?.value || '').toLowerCase();
+    const sel = new Set(dash.params().tickers || window.abDefaultTickers);
+    const srt = window.abSort || { k: 'from_3m_high', dir: 1 };
+    const rs = U.rows('assets').filter((r) => !q || (r.ticker + ' ' + r.name + ' ' + r.group).toLowerCase().includes(q))
+      .sort((a, b) => { const x = a[srt.k], y = b[srt.k]; return (typeof x === 'string' ? x.localeCompare(y) : (x ?? -9e9) - (y ?? -9e9)) * srt.dir; });
+    const pcts = ['chg_1d', 'chg_1w', 'chg_1m', 'since_start', 'from_3m_high', 'from_52w_high'];
+    const hideN = new Set(['group', 'chg_1w', 'since_start', 'from_52w_high']);
+    rs.forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.ticker; if (sel.has(r.ticker)) tr.className = 'sel';
+      ['ticker', 'name', 'group', 'last', ...pcts].forEach((k) => {
+        const td = document.createElement('td'); if (hideN.has(k)) td.className = 'hide-n';
+        const v = r[k];
+        if (pcts.includes(k)) { td.textContent = v == null ? '' : F.pct(v); if (v != null) td.classList.add(F.cls(v)); }
+        else if (k === 'last') td.textContent = r.ccy === 'PCT10' ? F.num(v, 2) + ' %' : F.num(v, v > 1000 ? 0 : 2);
+        else td.textContent = v;
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('mini', (el) => {
+    if (U.fail(el, 'prices')) return;
+    const t = el.dataset.ticker;
+    const rs = U.rows('prices').slice(-127).filter((r) => r[t] != null);
+    const box = document.createElement('div'); el.replaceChildren(box);
+    const d = t === 'EURUSD=X' ? 3 : 2;
+    window.abLine(box, { series: [{ name: t, color: dash.colors[0], values: rs.map((r) => [new Date(r.date + 'T00:00:00Z'), r[t]]) }],
+      height: 140, yFmt: (v) => F.num(v, d === 3 ? 2 : 0), tipFmt: (v) => F.num(v, d) });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.abFmt, U = window.abU;
+
+  dash.draw('alerts', (el) => {
+    if (U.fail(el, 'alerts')) return;
+    el.replaceChildren();
+    U.rows('alerts').forEach((a) => {
+      const row = document.createElement('div'); row.className = 'ab-alert';
+      const p = document.createElement('span'); p.className = 'ab-pill ' + (a.triggered ? 'on' : 'off'); p.textContent = a.triggered ? 'Déclenchée' : 'Calme';
+      p.dataset.source = 'alerts'; p.dataset.field = 'triggered'; p.dataset.where = 'id=' + encodeURIComponent(a.id);
+      const isPct = a.indicator.startsWith('Pair');
+      const fmt = (v) => (isPct ? F.pct(v) : F.num(v, 0));
+      const l1 = document.createElement('div');
+      const c = document.createElement('b'); c.textContent = a.indicator + ' : ' + fmt(a.current);
+      c.dataset.source = 'alerts'; c.dataset.field = 'current'; c.dataset.where = 'id=' + encodeURIComponent(a.id);
+      const s = document.createElement('span'); s.textContent = ' (seuil ' + a.op + ' ' + fmt(a.value) + ', au ' + F.date(a.as_of) + ')';
+      l1.append(c, s);
+      const l2 = document.createElement('div'); l2.className = 'a'; l2.textContent = '→ ' + a.action;
+      row.append(p, l1, l2); el.appendChild(row);
+    });
+  });
+
+  dash.draw('cdschart', (el) => {
+    if (U.fail(el, 'signals')) return;
+    const want = [['CDS 5 ans Oracle', 0], ['CDS 5 ans CoreWeave', 1], ['CDS 5 ans SoftBank', 2]];
+    const rs = U.rows('signals');
+    const series = want.map(([k, i]) => ({ name: k.replace('CDS 5 ans ', ''), color: dash.colors[i], dots: true,
+      values: rs.filter((r) => r.indicator === k).map((r) => [new Date(r.date + 'T00:00:00Z'), Number(r.value)]) })).filter((s) => s.values.length);
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, height: 220, yFmt: (v) => F.num(v, 0), tipFmt: (v) => F.num(v, 0) + ' pb' });
+    window.abLegend(el, series.map((s) => ({ key: s.name, name: s.name, color: s.color })), new Set(), () => {});
+  });
+
+  dash.draw('sigrows', (tb) => {
+    tb.replaceChildren();
+    if (!U.ok('signals')) return;
+    U.rows('signals').slice().sort((a, b) => b.date.localeCompare(a.date)).forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.date) + ',' + encodeURIComponent(r.indicator);
+      const cells = [r.date, r.indicator, r.note, F.num(Number(r.value), 0), r.unit];
+      cells.forEach((v, i) => { const td = document.createElement('td'); if (i === 2) td.className = 'hide-n'; td.textContent = v; tr.appendChild(td); });
+      if (/^https:\/\//.test(r.source)) {
+        const td = tr.children[1]; td.textContent = ''; const a = document.createElement('a'); a.href = r.source; a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.indicator; a.className = 'ab-src'; td.appendChild(a);
+      }
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('events', (el) => {
+    if (U.fail(el, 'events')) return;
+    el.replaceChildren();
+    const today = new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00Z');
+    U.rows('events').slice().sort((a, b) => a.date.localeCompare(b.date)).forEach((e) => {
+      const d = new Date(e.date + 'T00:00:00Z'); const n = Math.round((d - today) / 864e5);
+      const row = document.createElement('div'); row.className = 'ab-ev' + (n < 0 ? ' past' : '');
+      const a = document.createElement('span'); a.textContent = F.date(e.date); a.dataset.source = 'events'; a.dataset.field = 'date'; a.dataset.where = 'label=' + encodeURIComponent(e.label);
+      const b = document.createElement('span'); b.textContent = e.label; b.dataset.source = 'events'; b.dataset.field = 'label'; b.dataset.where = 'label=' + encodeURIComponent(e.label);
+      const c = document.createElement('span'); c.className = 'c'; c.textContent = n < 0 ? 'passé' : n === 0 ? "aujourd'hui" : 'J-' + n;
+      row.append(a, b, c); el.appendChild(row);
+    });
+  });
+})();
+</script>
