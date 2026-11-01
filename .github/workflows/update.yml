@@ -22,6 +22,7 @@ jobs:
           python-version: "3.12"
       - run: pip install yfinance pandas numpy
       - run: python scripts/fetch_prices.py
+      - run: python scripts/fetch_fundamentals.py || echo 'fondamentaux indisponibles'
       - run: python scripts/compute.py
       - run: python scripts/build_site.py
       - name: Commit

@@ -17,8 +17,10 @@ S = json.loads((ROOT / "config/strategies.json").read_text())
 T = json.loads((ROOT / "config/thresholds.json").read_text())
 CAP = S["capital_eur"]
 
-px = pd.read_csv(ROOT / "data/prices.csv", parse_dates=["date"], index_col="date").sort_index()
-px = px.ffill()  # jours fériés différents selon les places
+raw = pd.read_csv(ROOT / "data/prices.csv", parse_dates=["date"], index_col="date").sort_index()
+# on ne garde que les jours de Bourse (Yahoo ajoute parfois un jour de week-end avec la seule devise)
+raw = raw[raw.drop(columns=[U["fx"]]).notna().sum(axis=1) >= 3]
+px = raw.ffill()  # jours fériés différents selon les places
 ccy = {a["ticker"]: a["ccy"] for a in U["assets"]}
 names = {a["ticker"]: a["name"] for a in U["assets"]}
 fx = px[U["fx"]]  # USD pour 1 EUR
@@ -110,7 +112,7 @@ last_d = px.index[-1]
 start_live = first_on_or_after(U["start_date"], px.index)
 rows = []
 for a in U["assets"]:
-    s = px[a["ticker"]].dropna()
+    s = raw[a["ticker"]].dropna()
     if s.empty:
         continue
 
@@ -121,7 +123,8 @@ for a in U["assets"]:
     w52 = s[s.index >= last_d - pd.Timedelta(days=365)]
     rows.append({**a, "last": round(float(s.iloc[-1]), 4),
                  "chg_1d": chg(1), "chg_1w": chg(5), "chg_1m": chg(21),
-                 "since_start": round(float(s.iloc[-1] / s.loc[:start_live].iloc[-1] - 1), 5),
+                 "since_start": (round(float(s.iloc[-1] / s.loc[:start_live].iloc[-1] - 1), 5)
+                                 if s.index[-1] > start_live else None),
                  "from_3m_high": round(float(s.iloc[-1] / w3.max() - 1), 5),
                  "from_52w_high": round(float(s.iloc[-1] / w52.max() - 1), 5)})
 summary = pd.DataFrame(rows)
@@ -179,11 +182,76 @@ sig2["date"] = sig2["date"].dt.strftime("%Y-%m-%d")
 dump("signals.json", json.loads(sig2.fillna("").to_json(orient="records")))
 dump("alerts.json", alerts)
 dump("events.json", T["events"])
+# ---------- Vue d'ensemble : solides contre fragiles, bêta, tension ----------
+SOLIDES = ["NVDA", "TSM", "GOOGL", "MSFT"]
+FRAGILES = ["ORCL", "CRWV", "NBIS"]
+th_start = px.index[-1] - pd.Timedelta(days=183)
+w = px[px.index >= th_start]
+idx_s = (w[SOLIDES] / w[SOLIDES].iloc[0]).mean(axis=1) * 100
+idx_f = (w[FRAGILES] / w[FRAGILES].iloc[0]).mean(axis=1) * 100
+ret = raw[["NVDA", "CRWV", "^NDX"]].ffill().pct_change()
+# rapport des sensibilités au Nasdaq-100 (60 séances) : c'est lui qui fixe le dosage du pair trade
+b_c = ret["CRWV"].rolling(60).cov(ret["^NDX"]) / ret["^NDX"].rolling(60).var()
+b_n = ret["NVDA"].rolling(60).cov(ret["^NDX"]) / ret["^NDX"].rolling(60).var()
+beta = b_c / b_n
+thesis = pd.DataFrame({"solides": idx_s.round(2), "fragiles": idx_f.round(2),
+                       "ecart": (idx_s - idx_f).round(2), "beta_crwv_nvda": beta.reindex(w.index).round(3)})
+thesis.index.name = "date"
+dump_thesis = recs(thesis)
+
+# Bêtas des paniers contre le Nasdaq-100 (6 mois, rendements quotidiens) pour le simulateur
+r6 = raw.ffill().pct_change()[raw.index >= th_start]
+def beta_of(cols):
+    b = r6[cols].mean(axis=1)
+    return round(float(b.cov(r6["^NDX"]) / r6["^NDX"].var()), 3)
+betas = [{"id": "leaders", "nom": "Leaders qui encaissent", "beta": beta_of(SOLIDES)},
+         {"id": "pelles", "nom": "Pelles & pioches", "beta": beta_of(["SU.PA", "ENR.DE", "LR.PA", "ASML.AS"])},
+         {"id": "nvda", "nom": "Nvidia", "beta": beta_of(["NVDA"])},
+         {"id": "crwv", "nom": "CoreWeave", "beta": beta_of(["CRWV"])},
+         {"id": "fragiles", "nom": "Endettés IA", "beta": beta_of(FRAGILES)}]
+
+# Indice de tension (0 = calme, 100 = alerte), chaque composante ramenée entre deux bornes
+def last_sig(name):
+    m = sig[sig["indicator"] == name]
+    return (float(m["value"].iloc[-1]), str(m["date"].iloc[-1].date())) if len(m) else (None, None)
+def last_sig_prefix(prefix):
+    m = sig[sig["indicator"].str.startswith(prefix)]
+    return (float(m["value"].iloc[-1]), str(m["date"].iloc[-1].date())) if len(m) else (None, None)
+def dd3m(t):
+    s3 = raw[t].dropna(); s3 = s3[s3.index >= s3.index[-1] - pd.Timedelta(days=91)]
+    return float(s3.iloc[-1] / s3.max() - 1)
+frag_dd = sum(dd3m(t) for t in FRAGILES) / len(FRAGILES)
+comp = []
+def add(nom, val, unite, lo, hi, quand, explication, inverse=False):
+    if val is None:
+        return
+    x = (val - lo) / (hi - lo)
+    comp.append({"composante": nom, "valeur": round(val, 4), "unite": unite, "calme": lo, "alerte": hi,
+                 "score": round(max(0.0, min(1.0, x)) * 100, 1), "date": quand, "explication": explication})
+v, d = last_sig("CDS 5 ans Oracle"); add("CDS Oracle", v, "pb", 150, 350, d, "Prix de l'assurance contre le défaut d'Oracle")
+v, d = last_sig("CDS 5 ans CoreWeave"); add("CDS CoreWeave", v, "pb", 400, 1200, d, "Prix de l'assurance contre le défaut de CoreWeave")
+v, d = last_sig_prefix("Proba hausse Fed"); add("Hausse de la Fed", v, "%", 0, 100, d, "Probabilité d'une hausse de taux à la prochaine réunion")
+add("VIX", float(raw["^VIX"].dropna().iloc[-1]), "pts", 12, 30, str(last_d.date()), "Indice de la peur sur le marché américain")
+add("Crédit high yield", -dd3m("HYG") * 100, "% sous le plus haut 3 mois", 0, 5, str(last_d.date()), "Baisse de l'ETF HYG : la tension gagne-t-elle tout le crédit ?")
+add("Endettés IA", -frag_dd * 100, "% sous le plus haut 3 mois", 0, 50, str(last_d.date()), "Baisse moyenne d'Oracle, CoreWeave et Nebius")
+score = round(sum(c["score"] for c in comp) / len(comp), 1)
+niveau = "calme" if score < 33 else "tendu" if score < 66 else "alerte"
+tension = [{"composante": "Indice de tension", "valeur": score, "unite": "/100", "calme": 0, "alerte": 100,
+            "score": score, "date": str(last_d.date()), "explication": niveau}] + comp
+
 news = []
 for f in sorted((ROOT / "newsletters").glob("*.md"), reverse=True):
     txt = f.read_text()
     title = next((l.lstrip("# ").strip() for l in txt.splitlines() if l.startswith("# ")), f.stem)
     news.append({"date": f.stem, "title": title, "markdown": txt})
 dump("newsletters.json", news)
+dump("thesis.json", dump_thesis)
+dump("betas.json", betas)
+dump("tension.json", tension)
+fpath = ROOT / "data/fundamentals.csv"
+if fpath.exists():
+    f = pd.read_csv(fpath)
+    dump("fundamentals.json", json.loads(f.to_json(orient="records")))
+print("tension", score, niveau, "| betas", {b["id"]: b["beta"] for b in betas})
 print("as_of", last_d.date(), "| live", {x["id"]: x["pnl_pct"] for x in live_stats},
       "| backtest", {x["id"]: x["pnl_pct"] for x in bt_stats})

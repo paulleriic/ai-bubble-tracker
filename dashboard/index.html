@@ -84,6 +84,36 @@
 .ab-nl table td, .ab-nl table th { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
 .ab-nl table td:first-child, .ab-nl table th:first-child { text-align: left; }
 .ab-nl table th { position: static; color: var(--color-fg-muted); font-weight: 500; }
+.ab-hwrap { overflow-x: auto; }
+.ab-grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
+.ab-banner { margin: 0; padding: var(--cds-pad-sm) var(--cds-pad-md); border: 1px solid var(--color-border-line); border-left: 3px solid var(--color-warn); border-radius: var(--cds-radius); font-size: var(--cds-font-size-caption); }
+.ab-tension { display: grid; gap: var(--cds-gap-sm); }
+.ab-tension .big { display: flex; align-items: baseline; gap: var(--cds-gap-sm); flex-wrap: wrap; }
+.ab-tension .big .v { font-family: var(--font-anthropic-serif); font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; }
+.ab-tension .lvl { border-radius: 999px; padding: 2px 10px; font-size: var(--cds-font-size-caption); font-weight: 600; border: 1px solid currentColor; }
+.ab-tension .lvl.calme { color: var(--color-ok); } .ab-tension .lvl.tendu { color: var(--color-warn); } .ab-tension .lvl.alerte { color: var(--color-bad); }
+.ab-comp { display: grid; grid-template-columns: minmax(7rem, 9rem) 1fr auto; gap: 2px var(--cds-gap-sm); align-items: center; font-size: var(--cds-font-size-caption); }
+.ab-comp .lbl { color: var(--color-fg); }
+.ab-comp .val { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ab-comp .why { grid-column: 1 / -1; color: var(--color-fg-muted); margin-bottom: 6px; }
+.ab-bar2 { height: 8px; border-radius: 4px; background: var(--cds-chart-grid); position: relative; overflow: hidden; }
+.ab-bar2 i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+.ab-heat { display: grid; grid-template-columns: minmax(8rem, 1.4fr) repeat(5, minmax(3.6rem, 1fr)); gap: 2px; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; min-width: 30rem; }
+.ab-heat .h { color: var(--color-fg-muted); font-weight: 500; padding: 4px 6px; text-align: center; }
+.ab-heat .h.first { text-align: left; }
+.ab-heat .g { grid-column: 1 / -1; color: var(--color-fg-muted); font-weight: 600; padding: 8px 6px 2px; }
+.ab-heat .n { padding: 5px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ab-heat .c { padding: 5px 6px; text-align: center; border-radius: 4px; color: var(--color-fg); }
+.ab-sim-controls { display: grid; gap: var(--cds-gap-sm); }
+.ab-slider { display: grid; gap: 4px; font-size: var(--cds-font-size-caption); }
+.ab-slider input { width: 100%; accent-color: var(--color-fg); }
+.ab-sim { display: grid; gap: 6px; }
+.ab-simrow { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr 6.5rem; gap: var(--cds-gap-sm); align-items: center; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ab-simrow .track { position: relative; height: 18px; }
+.ab-simrow .track .mid { position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--cds-chart-axis); }
+.ab-simrow .track i { position: absolute; top: 3px; height: 12px; border-radius: 3px; }
+.ab-simrow .amt { text-align: right; font-weight: 600; }
+@media (max-width: 520px) { .ab-simrow { grid-template-columns: 7rem 1fr 5.5rem; } .ab-comp { grid-template-columns: 6.5rem 1fr auto; } }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 .ab-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -99,13 +129,39 @@
   <div class="ab-kpis" id="point" data-draw="kpis" data-source="assets signals"></div>
 
   <nav class="ab-tabs" role="tablist" aria-label="Vues">
-    <button class="ab-tab" role="tab" data-tab="strategies" aria-selected="true">Stratégies</button>
+    <button class="ab-tab" role="tab" data-tab="apercu" aria-selected="true">Vue d'ensemble</button>
+    <button class="ab-tab" role="tab" data-tab="strategies" aria-selected="false">Stratégies</button>
     <button class="ab-tab" role="tab" data-tab="cours" aria-selected="false">Cours</button>
     <button class="ab-tab" role="tab" data-tab="signaux" aria-selected="false">Signaux et calendrier</button>
     <button class="ab-tab" role="tab" data-tab="newsletter" aria-selected="false">Newsletter</button>
   </nav>
 
-  <section class="ab-sec" id="strategies" data-page="strategies">
+  <section class="ab-sec" id="apercu" data-page="apercu">
+    <div class="ab-grid ab-grid-2">
+      <div class="ab-card" id="tension">
+        <h2>Niveau de tension sur l'IA</h2>
+        <p class="ab-note">Six thermomètres ramenés de 0 (calme) à 100 (alerte), puis moyennés. Le crédit et la Fed pèsent autant que les cours.</p>
+        <div class="ab-tension" data-draw="tension" data-source="tension"></div>
+      </div>
+      <div class="ab-card" id="these">
+        <h2>Solides contre fragiles, 6 mois</h2>
+        <p class="ab-note">Base 100 il y a six mois. Solides : Nvidia, TSMC, Alphabet, Microsoft. Fragiles (endettés) : Oracle, CoreWeave, Nebius. Un écart qui se creuse confirme la thèse du pair trade.</p>
+        <div class="ab-chart" data-draw="thesis" data-source="thesis"></div>
+      </div>
+    </div>
+    <div class="ab-card" id="chaleur">
+      <h2>Carte de chaleur des variations</h2>
+      <p class="ab-note">Rouge : baisse, vert : hausse. Les deux dernières colonnes mesurent la distance au plus haut ; plus c'est rouge, plus la correction est profonde.</p>
+      <div class="ab-hwrap"><div class="ab-heat" data-draw="heat" data-source="assets"></div></div>
+    </div>
+    <div class="ab-card" id="beta">
+      <h2>CoreWeave réagit combien de fois plus que Nvidia aux mouvements du marché ?</h2>
+      <p class="ab-note">Rapport entre la sensibilité de CoreWeave et celle de Nvidia au Nasdaq-100, sur 60 séances glissantes. Le pair trade vend 5 000 € de CoreWeave pour 10 000 € de Nvidia, ce qui suppose un rapport de 2 (ligne pointillée). S'il s'en éloigne nettement, le dosage n'est plus neutre au marché.</p>
+      <div class="ab-chart sm" data-draw="betachart" data-source="thesis"></div>
+    </div>
+  </section>
+
+  <section class="ab-sec" id="strategies" data-page="strategies" hidden>
     <div class="ab-bar">
       <div class="ab-seg" role="group" aria-label="Période de calcul">
         <button type="button" data-mode="live" aria-pressed="false">Suivi réel</button>
@@ -113,6 +169,7 @@
       </div>
       <p class="ab-note">Portefeuilles fictifs de 10 000 € chacun, en euros. Départ le <b data-draw="mstart" data-source="strategy_stats">—</b>.</p>
     </div>
+    <p class="ab-banner" data-draw="livenote" data-source="strategies" hidden>—</p>
     <div class="ab-tiles" id="tiles" data-draw="tiles" data-source="strategy_stats strategies"></div>
 
     <div class="ab-card" id="valeur">
@@ -132,6 +189,29 @@
         <p class="ab-note">Résultat du short Nasdaq-100 (40 % du montant), et argent investi par la stratégie par paliers.</p>
         <div class="ab-chart" data-draw="hedgechart" data-source="strategies"></div>
       </div>
+    </div>
+
+    <div class="ab-card" id="pires-baisses">
+      <h2>Pires baisses en cours de route</h2>
+      <p class="ab-note">Distance de chaque stratégie à son plus haut précédent. C'est la douleur que tu aurais ressentie, même si le résultat final est positif.</p>
+      <div class="ab-chart" data-draw="ddchart" data-source="strategies"></div>
+    </div>
+
+    <div class="ab-card" id="simulateur">
+      <h2>Simulateur : et si demain…</h2>
+      <p class="ab-note">Bouge les curseurs pour voir le gain ou la perte de chaque stratégie (10 000 € chacune), estimés avec la sensibilité de chaque panier au Nasdaq-100 sur 6 mois.</p>
+      <div class="ab-sim-controls">
+        <label class="ab-slider" for="ab-sim-m"><span>Nasdaq-100 : <b data-draw="simm" data-source="betas">—</b></span><input id="ab-sim-m" type="range" min="-40" max="30" step="1" value="-10"></label>
+        <label class="ab-slider" for="ab-sim-c"><span>Choc de crédit sur CoreWeave, en plus : <b data-draw="simc" data-source="betas">—</b></span><input id="ab-sim-c" type="range" min="-50" max="50" step="1" value="-20"></label>
+        <div class="ab-seg" role="group" aria-label="Scénarios types">
+          <button type="button" data-sim="-10,-30">Crise du crédit</button>
+          <button type="button" data-sim="-30,0">Krach général</button>
+          <button type="button" data-sim="10,40">Euphorie, short squeeze</button>
+          <button type="button" data-sim="0,0">Remise à zéro</button>
+        </div>
+      </div>
+      <div class="ab-sim" data-draw="sim" data-source="betas"></div>
+      <p class="ab-note">Estimation linéaire, sans frais de financement : en vraie crise, les sensibilités changent. C'est un outil pour comprendre les mécanismes, pas une prévision.</p>
     </div>
   </section>
 
@@ -170,6 +250,28 @@
             <th data-field="from_52w_high" class="hide-n"><button class="ab-th" data-sort="from_52w_high">Écart 1 an</button></th>
           </tr></thead>
           <tbody data-draw="assetrows" data-source="assets"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-sec" id="valorisations" data-page="cours" hidden>
+    <div class="ab-card">
+      <h2>Valorisations et solidité financière</h2>
+      <p class="ab-note">PER : nombre d'années de bénéfices payées. Free cash-flow négatif (en rouge) : l'entreprise dépense plus qu'elle ne gagne et doit emprunter. Montants en milliards, dans la devise des comptes de l'entreprise. Source : Yahoo Finance, mis à jour chaque soir.</p>
+      <div class="ab-twrap">
+        <table class="ab-table" data-source="fundamentals" data-row-key="ticker">
+          <thead><tr>
+            <th data-field="name"><button class="ab-th" tabindex="-1">Entreprise</button></th>
+            <th data-field="group" class="hide-n"><button class="ab-th" tabindex="-1">Groupe</button></th>
+            <th data-field="capitalisation"><button class="ab-th" tabindex="-1">Capitalisation</button></th>
+            <th data-field="per_historique" class="hide-n"><button class="ab-th" tabindex="-1">PER historique</button></th>
+            <th data-field="per_previsionnel"><button class="ab-th" tabindex="-1">PER prévisionnel</button></th>
+            <th data-field="dette" class="hide-n"><button class="ab-th" tabindex="-1">Dette</button></th>
+            <th data-field="tresorerie" class="hide-n"><button class="ab-th" tabindex="-1">Trésorerie</button></th>
+            <th data-field="free_cash_flow"><button class="ab-th" tabindex="-1">Free cash-flow</button></th>
+          </tr></thead>
+          <tbody data-draw="fundrows" data-source="fundamentals"></tbody>
         </table>
       </div>
     </div>
@@ -274,7 +376,7 @@
   };
   document.querySelectorAll('.ab-tab').forEach((b) => b.addEventListener('click', () => { show(b.dataset.tab); dash.setLink(b.dataset.tab); }));
   const named = location.hash.slice(1);
-  if (['strategies', 'cours', 'signaux', 'newsletter'].includes(named)) show(named);
+  if (['apercu', 'strategies', 'cours', 'signaux', 'newsletter'].includes(named)) show(named);
 
   document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => dash.setParams({ mode: b.dataset.mode })));
   document.querySelectorAll('[data-period]').forEach((b) => b.addEventListener('click', () => dash.setParams({ period: Number(b.dataset.period) })));
@@ -726,6 +828,181 @@
     if (!r) return;
     el.dataset.source = 'newsletters'; el.dataset.field = 'markdown'; el.dataset.where = 'date=' + enc(r.date);
     render(el, r.markdown);
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.abFmt, U = window.abU, N = window.abNames, CAP = 10000;
+  const enc = encodeURIComponent;
+  const pct0 = (v) => (v > 0 ? '+' : '') + new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(v) + ' %';
+
+  // Bandeau « suivi réel trop récent »
+  dash.onData(() => {
+    const live = U.rows('strategies').filter((r) => r.mode === 'live').length;
+    document.querySelectorAll('[data-draw="livenote"]').forEach((el) => { el.hidden = !(U.ok('strategies') && live < 5); });
+  });
+  dash.draw('livenote', (el) => {
+    const live = U.rows('strategies').filter((r) => r.mode === 'live');
+    if (!live.length) { el.textContent = '—'; return; }
+    el.textContent = 'Le suivi réel a démarré le ' + F.date(live[0].date) + ' : il n’y a encore que ' + live.length +
+      ' séance(s), donc ses résultats sont proches de 0 %. Ils se rempliront chaque soir de Bourse. En attendant, le rétro-test sur 3 mois montre comment chaque stratégie se comporte.';
+  });
+
+  // Indice de tension
+  dash.draw('tension', (el) => {
+    if (U.fail(el, 'tension')) return;
+    const rs = U.rows('tension'); const tot = rs[0]; el.replaceChildren();
+    const big = document.createElement('div'); big.className = 'big';
+    const v = document.createElement('span'); v.className = 'v'; v.textContent = F.num(tot.score, 0);
+    Object.assign(v.dataset, { source: 'tension', field: 'score', where: 'composante=' + enc(tot.composante) });
+    const u = document.createElement('span'); u.className = 'ab-note'; u.textContent = 'sur 100';
+    const l = document.createElement('span'); l.className = 'lvl ' + tot.explication; l.textContent = tot.explication === 'calme' ? 'Calme' : tot.explication === 'tendu' ? 'Tendu' : 'Alerte';
+    Object.assign(l.dataset, { source: 'tension', field: 'explication', where: 'composante=' + enc(tot.composante) });
+    big.append(v, u, l); el.appendChild(big);
+    const box = document.createElement('div'); box.className = 'ab-comp';
+    rs.slice(1).forEach((c) => {
+      const w = 'composante=' + enc(c.composante);
+      const a = document.createElement('span'); a.className = 'lbl'; a.textContent = c.composante;
+      const bar = document.createElement('div'); bar.className = 'ab-bar2';
+      const i = document.createElement('i'); i.style.width = c.score + '%';
+      i.style.background = c.score >= 66 ? 'var(--color-bad)' : c.score >= 33 ? 'var(--color-warn)' : 'var(--color-ok)';
+      Object.assign(i.dataset, { source: 'tension', field: 'score', where: w }); bar.appendChild(i);
+      const val = document.createElement('span'); val.className = 'val';
+      const isPctDD = c.unite.startsWith('% sous');
+      val.textContent = (isPctDD ? '−' + F.num(c.valeur, 1) + ' %' : F.num(c.valeur, c.unite === 'pts' ? 1 : 0) + ' ' + c.unite) + ' · ' + F.dateS(new Date(c.date + 'T00:00:00Z'));
+      Object.assign(val.dataset, { source: 'tension', field: 'valeur', where: w });
+      const why = document.createElement('span'); why.className = 'why';
+      why.textContent = c.explication + ' (calme à ' + F.num(c.calme, 0) + ', alerte à ' + F.num(c.alerte, 0) + ')';
+      box.append(a, bar, val, why);
+    });
+    el.appendChild(box);
+  });
+
+  // Solides contre fragiles
+  dash.draw('thesis', (el) => {
+    if (U.fail(el, 'thesis')) return;
+    const rs = U.rows('thesis'); const d = (r) => new Date(r.date + 'T00:00:00Z');
+    const items = [{ key: 'solides', name: 'Solides (leaders)', color: dash.colors[0] }, { key: 'fragiles', name: 'Fragiles (endettés)', color: 'var(--color-bad)' }];
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series: items.map((it) => ({ name: it.name, color: it.color, width: 2.5, values: rs.map((r) => [d(r), r[it.key]]) })),
+      height: 280, yFmt: (v) => F.num(v, 0), tipFmt: (v) => F.num(v, 1), refY: 100 });
+    window.abLegend(el, items, new Set(), () => {});
+    const last = rs[rs.length - 1];
+    const p = document.createElement('p'); p.className = 'ab-note';
+    p.textContent = 'Aujourd’hui : solides à ' + F.num(last.solides, 0) + ', fragiles à ' + F.num(last.fragiles, 0) + ', soit un écart de ' + F.num(last.ecart, 0) + ' points.';
+    Object.assign(p.dataset, { source: 'thesis', field: 'ecart', where: 'date=' + last.date });
+    el.appendChild(p);
+  });
+
+  dash.draw('betachart', (el) => {
+    if (U.fail(el, 'thesis')) return;
+    const rs = U.rows('thesis').filter((r) => r.beta_crwv_nvda != null);
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series: [{ name: 'Bêta', color: dash.colors[0], values: rs.map((r) => [new Date(r.date + 'T00:00:00Z'), r.beta_crwv_nvda]) }],
+      height: 170, yFmt: (v) => F.num(v, 1), tipFmt: (v) => 'rapport ' + F.num(v, 2), refY: 2 });
+  });
+
+  // Carte de chaleur
+  const COLS = [['chg_1d', '1 jour', 0.05], ['chg_1w', '1 sem.', 0.10], ['chg_1m', '1 mois', 0.25], ['from_3m_high', 'Écart 3 mois', 0.5], ['from_52w_high', 'Écart 1 an', 0.6]];
+  dash.draw('heat', (el) => {
+    if (U.fail(el, 'assets')) return;
+    el.replaceChildren();
+    const h0 = document.createElement('div'); h0.className = 'h first'; h0.textContent = 'Valeur'; el.appendChild(h0);
+    COLS.forEach(([, lab]) => { const h = document.createElement('div'); h.className = 'h'; h.textContent = lab; el.appendChild(h); });
+    const groups = [];
+    U.rows('assets').filter((a) => a.group !== 'Signaux').forEach((a) => { if (!groups.includes(a.group)) groups.push(a.group); });
+    groups.forEach((g) => {
+      const gh = document.createElement('div'); gh.className = 'g'; gh.textContent = g; el.appendChild(gh);
+      U.rows('assets').filter((a) => a.group === g).forEach((a) => {
+        const n = document.createElement('div'); n.className = 'n'; n.textContent = a.name; n.title = a.ticker; el.appendChild(n);
+        COLS.forEach(([k, , max]) => {
+          const c = document.createElement('div'); c.className = 'c'; const v = a[k];
+          if (v == null) { c.textContent = ''; el.appendChild(c); return; }
+          const t = Math.min(1, Math.abs(v) / max); const pctMix = Math.round(12 + t * 60);
+          c.style.background = `color-mix(in srgb, ${v >= 0 ? 'var(--color-ok)' : 'var(--color-bad)'} ${pctMix}%, transparent)`;
+          c.textContent = F.pct(v);
+          Object.assign(c.dataset, { source: 'assets', field: k, where: 'ticker=' + enc(a.ticker) });
+          el.appendChild(c);
+        });
+      });
+    });
+  });
+
+  // Pires baisses
+  dash.draw('ddchart', (el) => {
+    if (U.fail(el, 'strategies')) return;
+    const m = window.abMode(); const rs = U.rows('strategies').filter((r) => r.mode === m);
+    const keys = ['leaders', 'pelles', 'pair', 'hedged', 'paliers', 'bench_ndx'];
+    const series = keys.map((k, i) => {
+      let peak = -Infinity;
+      return { name: N[k], color: k.startsWith('bench') ? 'var(--cds-chart-muted)' : dash.colors[i % 8], dash: k.startsWith('bench') ? '2 3' : null,
+        values: rs.map((r) => { peak = Math.max(peak, r[k]); return [new Date(r.date + 'T00:00:00Z'), r[k] / peak - 1]; }) };
+    });
+    const box = document.createElement('div'); el.replaceChildren(box);
+    window.abLine(box, { series, height: 260, yFmt: (v) => F.pct(v).replace(',0', ''), tipFmt: (v) => F.pct(v), refY: 0 });
+    window.abLegend(el, series.map((s, i) => ({ key: keys[i], name: s.name, color: s.color })), new Set(), () => {});
+  });
+
+  // Simulateur
+  const simVals = () => ({ m: dash.params().sim_m ?? -10, c: dash.params().sim_c ?? -20 });
+  document.querySelectorAll('#ab-sim-m').forEach((i) => i.addEventListener('input', () => dash.setParams({ sim_m: Number(i.value) })));
+  document.querySelectorAll('#ab-sim-c').forEach((i) => i.addEventListener('input', () => dash.setParams({ sim_c: Number(i.value) })));
+  document.querySelectorAll('[data-sim]').forEach((b) => b.addEventListener('click', () => {
+    const [m, c] = b.dataset.sim.split(',').map(Number); dash.setParams({ sim_m: m, sim_c: c });
+  }));
+  dash.onData(() => {
+    const { m, c } = simVals();
+    document.querySelectorAll('#ab-sim-m').forEach((i) => { if (i !== document.activeElement) i.value = m; });
+    document.querySelectorAll('#ab-sim-c').forEach((i) => { if (i !== document.activeElement) i.value = c; });
+  });
+  dash.draw('simm', (el) => { el.textContent = pct0(simVals().m); });
+  dash.draw('simc', (el) => { el.textContent = pct0(simVals().c); });
+  dash.draw('sim', (el) => {
+    if (U.fail(el, 'betas')) return;
+    const B = Object.fromEntries(U.rows('betas').map((b) => [b.id, b.beta]));
+    const { m, c } = simVals(); const M = m / 100, C = c / 100;
+    const crwv = B.crwv * M + C;
+    const rows = [
+      { id: 'leaders', v: CAP * B.leaders * M, how: 'bêta ' + F.num(B.leaders, 2) + ' × Nasdaq' },
+      { id: 'pelles', v: CAP * B.pelles * M, how: 'bêta ' + F.num(B.pelles, 2) + ' × Nasdaq' },
+      { id: 'pair', v: CAP * B.nvda * M - 5000 * crwv, how: 'Nvidia ' + F.pct(B.nvda * M) + ', CoreWeave ' + F.pct(crwv) },
+      { id: 'hedged', v: CAP * B.leaders * M - 4000 * M, how: 'leaders moins 40 % de Nasdaq' },
+      { id: 'paliers', v: (CAP / 3) * B.leaders * M, how: 'un tiers investi pour l’instant' },
+      { id: 'bench_ndx', v: CAP * M, how: 'repère' },
+    ];
+    const max = Math.max(2000, ...rows.map((r) => Math.abs(r.v)));
+    el.replaceChildren();
+    rows.forEach((r) => {
+      const row = document.createElement('div'); row.className = 'ab-simrow';
+      const n = document.createElement('div'); n.textContent = N[r.id];
+      const sub = document.createElement('div'); sub.className = 'ab-note'; sub.textContent = r.how; n.appendChild(sub);
+      const tr = document.createElement('div'); tr.className = 'track';
+      const mid = document.createElement('span'); mid.className = 'mid';
+      const bar = document.createElement('i'); const w = (Math.abs(r.v) / max) * 50;
+      bar.style.width = w + '%'; bar.style.left = r.v >= 0 ? '50%' : (50 - w) + '%';
+      bar.style.background = r.id === 'bench_ndx' ? 'var(--cds-chart-muted)' : r.v >= 0 ? 'var(--color-ok)' : 'var(--color-bad)';
+      Object.assign(bar.dataset, { source: 'betas' });
+      tr.append(mid, bar);
+      const a = document.createElement('div'); a.className = 'amt ' + F.cls(r.v); a.textContent = F.eurS(Math.round(r.v));
+      row.append(n, tr, a); el.appendChild(row);
+    });
+  });
+
+  // Valorisations
+  const bn = (v) => (v == null ? '' : new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 }).format(v / 1e9) + ' Md');
+  dash.draw('fundrows', (tb) => {
+    tb.replaceChildren();
+    if (!U.ok('fundamentals')) return;
+    U.rows('fundamentals').forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.ticker;
+      const cells = [[r.name, ''], [r.group, 'hide-n'], [bn(r.capitalisation), ''],
+        [r.per_historique == null ? '' : F.num(r.per_historique, 1), 'hide-n'], [r.per_previsionnel == null ? '' : F.num(r.per_previsionnel, 1), ''],
+        [bn(r.dette), 'hide-n'], [bn(r.tresorerie), 'hide-n'], [bn(r.free_cash_flow), r.free_cash_flow != null && r.free_cash_flow < 0 ? 'down' : '']];
+      cells.forEach(([t, cls]) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = t; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
   });
 })();
 </script>

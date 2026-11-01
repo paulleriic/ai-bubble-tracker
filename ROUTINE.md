@@ -20,6 +20,10 @@ Tableau de bord : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf (type Dashbo
 | `data/dash/alerts.json` | `datasets/alerts` |
 | `data/dash/events.json` | `datasets/events` |
 | `data/dash/newsletters.json` | `datasets/newsletters` |
+| `data/dash/thesis.json` | `datasets/thesis` |
+| `data/dash/betas.json` | `datasets/betas` |
+| `data/dash/tension.json` | `datasets/tension` |
+| `data/dash/fundamentals.json` | `datasets/fundamentals` |
 
    Pour chacun : téléverser le fichier comme asset de l'artifact (Artifact, `asset: true`, un appel par fichier JSON), lire le document du jeu de données, puis faire un `update` (avec `if_version`) de `source.url`, `source.name` et `updated: {at, by}`. Ensuite, supprimer l'ancien asset (son id = les 32 caractères après `/_blob/` dans l'ancienne url).
 4. Envoyer le point du jour sur Telegram via le bot du repo `paulleriic/inli` :
