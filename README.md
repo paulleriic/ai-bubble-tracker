@@ -39,5 +39,5 @@ Repères : ETF MSCI World (URTH) et Nasdaq-100, convertis en euros.
 
 ## Tableau de bord et newsletter
 
-- Tableau de bord interactif (privé, sur Claude) : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf. Le code de la page est dans `dashboard/index.html`.
+- Tableau de bord public (GitHub Pages) : https://paulleriic.github.io/ai-bubble-tracker/, reconstruit à chaque mise à jour par `scripts/build_site.py`. Même page sur Claude : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf. Le code de la page est dans `dashboard/index.html`.
 - La tâche planifiée Claude qui le met à jour et rédige la newsletter du lundi suit `ROUTINE.md`.

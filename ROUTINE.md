@@ -24,7 +24,7 @@ Tableau de bord : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf (type Dashbo
    Pour chacun : téléverser le fichier comme asset de l'artifact (Artifact, `asset: true`, un appel par fichier JSON), lire le document du jeu de données, puis faire un `update` (avec `if_version`) de `source.url`, `source.name` et `updated: {at, by}`. Ensuite, supprimer l'ancien asset (son id = les 32 caractères après `/_blob/` dans l'ancienne url).
 4. Envoyer le point du jour sur Telegram via le bot du repo `paulleriic/inli` :
    - `python3 scripts/telegram_message.py` (ajouter `--monday` le lundi) écrit le message dans `data/telegram.html` ;
-   - déclencher le workflow `notify.yml` du repo inli : `POST repos/paulleriic/inli/actions/workflows/notify.yml/dispatches` avec `{"ref": "main", "inputs": {"message": <contenu de data/telegram.html>, "button_url": "https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf", "button_text": "Ouvrir le tableau de bord"}}` (ajouter `add_repo` paulleriic/inli en accès push) ;
+   - déclencher le workflow `notify.yml` du repo inli : `POST repos/paulleriic/inli/actions/workflows/notify.yml/dispatches` avec `{"ref": "main", "inputs": {"message": <contenu de data/telegram.html>, "button_url": "https://paulleriic.github.io/ai-bubble-tracker/", "button_text": "Ouvrir le tableau de bord"}}` (ajouter `add_repo` paulleriic/inli en accès push) ;
    - vérifier que le run se termine en succès.
 5. Si une règle de `data/dash/alerts.json` passe à `triggered: true`, le message Telegram le signale déjà ; le dire aussi dans la réponse de la session.
 

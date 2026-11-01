@@ -1,5 +1,6 @@
 <meta name="dash-one-writer">
 <style>
+.ab [hidden] { display: none !important; }
 .ab { font-family: var(--font-anthropic-sans); display: grid; gap: var(--cds-gap-lg); }
 .ab-head { display: grid; gap: var(--cds-gap-xs); }
 .ab-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
@@ -60,7 +61,7 @@
 .ab-ev .c { color: var(--color-fg-muted); }
 .ab-mini { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
 .ab-mini h3 { font-size: var(--cds-font-size-caption); font-weight: 500; color: var(--color-fg-muted); margin: 0; }
-.ab-src a { color: inherit; }
+.ab-table a { color: inherit; text-decoration-color: var(--color-border-line); }
 .ab-kpis { display: grid; gap: var(--cds-gap-sm); grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
 .ab-kpi { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); display: grid; gap: 2px; align-content: start; }
 .ab-kpi .n { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
@@ -527,7 +528,7 @@
       ['ticker', 'name', 'group', 'last', ...pcts].forEach((k) => {
         const td = document.createElement('td'); if (hideN.has(k)) td.className = 'hide-n';
         const v = r[k];
-        if (pcts.includes(k)) { td.textContent = v == null ? '' : F.pct(v); if (v != null) td.classList.add(F.cls(v)); }
+        if (pcts.includes(k)) { td.textContent = v == null ? '' : F.pct(v); if (v != null && F.cls(v)) td.classList.add(F.cls(v)); }
         else if (k === 'last') td.textContent = r.ccy === 'PCT10' ? F.num(v, 2) + ' %' : F.num(v, v > 1000 ? 0 : 2);
         else td.textContent = v;
         tr.appendChild(td);
@@ -541,9 +542,10 @@
     const t = el.dataset.ticker;
     const rs = U.rows('prices').slice(-127).filter((r) => r[t] != null);
     const box = document.createElement('div'); el.replaceChildren(box);
-    const d = t === 'EURUSD=X' ? 3 : 2;
+    const ext = d3.extent(rs, (r) => r[t]); const span = ext[1] - ext[0];
+    const ad = span < 0.5 ? 2 : span < 8 ? 1 : 0;
     window.abLine(box, { series: [{ name: t, color: dash.colors[0], values: rs.map((r) => [new Date(r.date + 'T00:00:00Z'), r[t]]) }],
-      height: 140, yFmt: (v) => F.num(v, d === 3 ? 2 : 0), tipFmt: (v) => F.num(v, d) });
+      height: 140, yFmt: (v) => F.num(v, ad), tipFmt: (v) => F.num(v, ad + 1) });
   });
 })();
 </script>

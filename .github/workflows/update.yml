@@ -2,9 +2,16 @@ name: Mise à jour quotidienne des cours
 on:
   schedule:
     - cron: "30 22 * * 1-5"   # après la clôture de Wall Street
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: update
+  cancel-in-progress: false
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -16,10 +23,23 @@ jobs:
       - run: pip install yfinance pandas numpy
       - run: python scripts/fetch_prices.py
       - run: python scripts/compute.py
+      - run: python scripts/build_site.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/
           git diff --cached --quiet || git commit -m "Cours du $(date -u +%F)"
-          git push
+          git pull --rebase -q origin main && git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
