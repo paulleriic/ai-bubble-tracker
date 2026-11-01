@@ -27,10 +27,17 @@ if trig:
 else:
     L.append(f"✅ Aucune règle déclenchée ({len(D['alerts'])} suivies)")
 L.append("")
-L.append("<b>Stratégies (suivi réel depuis le " + pd.Timestamp(D["start"]).strftime("%d/%m") + ")</b>")
-for s in D["strategies"]:
+live_days = (pd.Timestamp(D["as_of"]) - pd.Timestamp(D["start"])).days
+if live_days >= 7:
+    L.append("<b>Stratégies (suivi réel depuis le " + pd.Timestamp(D["start"]).strftime("%d/%m") + ")</b>")
+    rows = D["strategies"]
+else:
+    L.append("<b>Stratégies : rétro-test 3 mois</b> (le suivi réel démarré le "
+             + pd.Timestamp(D["start"]).strftime("%d/%m") + " n'a pas encore une semaine)")
+    rows = D["backtest"]
+for s in rows:
     if s["kind"] == "strategy":
-        L.append(f"• {escape(s['name'])} : {pct(s['pnl_pct'])}")
+        L.append(f"• {escape(s['name'])} : {pct(s['pnl_pct'])} (pire baisse {pct(s['max_drawdown'])})")
 today = pd.Timestamp.now(tz="Europe/Paris").strftime("%Y-%m-%d")
 nxt = [e for e in D["events"] if e["date"] >= today][:2]
 if nxt:
