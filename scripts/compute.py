@@ -179,5 +179,11 @@ sig2["date"] = sig2["date"].dt.strftime("%Y-%m-%d")
 dump("signals.json", json.loads(sig2.fillna("").to_json(orient="records")))
 dump("alerts.json", alerts)
 dump("events.json", T["events"])
+news = []
+for f in sorted((ROOT / "newsletters").glob("*.md"), reverse=True):
+    txt = f.read_text()
+    title = next((l.lstrip("# ").strip() for l in txt.splitlines() if l.startswith("# ")), f.stem)
+    news.append({"date": f.stem, "title": title, "markdown": txt})
+dump("newsletters.json", news)
 print("as_of", last_d.date(), "| live", {x["id"]: x["pnl_pct"] for x in live_stats},
       "| backtest", {x["id"]: x["pnl_pct"] for x in bt_stats})
