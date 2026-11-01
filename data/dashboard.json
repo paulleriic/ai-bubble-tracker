@@ -1,0 +1,137 @@
+{
+ "as_of": "2026-10-30",
+ "start": "2026-10-30",
+ "capital_eur": 10000,
+ "strategies": [
+  {
+   "id": "leaders",
+   "name": "Leaders qui encaissent",
+   "platform": "Trade Republic",
+   "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  },
+  {
+   "id": "pelles",
+   "name": "Pelles & pioches (PEA)",
+   "platform": "Trade Republic (PEA)",
+   "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  },
+  {
+   "id": "pair",
+   "name": "Pair trade Nvidia / CoreWeave",
+   "platform": "Axi (CFD)",
+   "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  },
+  {
+   "id": "hedged",
+   "name": "Leaders + couverture NAS100",
+   "platform": "Trade Republic + Axi",
+   "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  },
+  {
+   "id": "paliers",
+   "name": "Leaders achetés par paliers",
+   "platform": "Trade Republic",
+   "thesis": "3 achats égaux sur 2 mois : on renonce au meilleur prix pour éviter le pire timing.",
+   "value": 10000.0,
+   "pnl": 0.0,
+   "pnl_pct": 0.0,
+   "max_drawdown": 0.0
+  }
+ ],
+ "alerts": [
+  {
+   "indicator": "CDS 5 ans Oracle",
+   "op": ">",
+   "value": 350,
+   "action": "Renforcer la couverture NAS100 et le short CoreWeave",
+   "current": 288.0,
+   "triggered": false
+  },
+  {
+   "indicator": "CDS 5 ans Oracle",
+   "op": "<",
+   "value": 220,
+   "action": "Alléger la couverture, renforcer le cœur",
+   "current": 288.0,
+   "triggered": false
+  },
+  {
+   "indicator": "CDS 5 ans CoreWeave",
+   "op": ">",
+   "value": 1200,
+   "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)",
+   "current": 1000.0,
+   "triggered": false
+  },
+  {
+   "indicator": "Proba hausse Fed 9 déc.",
+   "op": ">",
+   "value": 80,
+   "action": "Prudence sur les valeurs de croissance (effet duration)",
+   "current": 71.0,
+   "triggered": false
+  },
+  {
+   "indicator": "Pair trade (P&L / capital)",
+   "op": "<",
+   "value": -0.1,
+   "current": 0.0,
+   "triggered": false,
+   "action": "Stop-loss : couper le pair trade"
+  }
+ ],
+ "events": [
+  {
+   "date": "2026-11-02",
+   "label": "Résultats Palantir"
+  },
+  {
+   "date": "2026-11-03",
+   "label": "Résultats AMD"
+  },
+  {
+   "date": "2026-11-16",
+   "label": "Date limite des 13F (positions des fonds)"
+  },
+  {
+   "date": "2026-11-17",
+   "label": "Résultats Nvidia"
+  },
+  {
+   "date": "2026-11-20",
+   "label": "Échéance mensuelle des options"
+  },
+  {
+   "date": "2026-12-01",
+   "label": "2e palier d'achat (stratégie paliers)"
+  },
+  {
+   "date": "2026-12-08",
+   "label": "Résultats Oracle"
+  },
+  {
+   "date": "2026-12-09",
+   "label": "Résultats Broadcom + décision de la Fed"
+  },
+  {
+   "date": "2027-01-04",
+   "label": "3e palier d'achat (stratégie paliers)"
+  }
+ ]
+}
