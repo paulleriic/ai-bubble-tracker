@@ -1,0 +1,31 @@
+{
+  "start_date": "2026-10-30",
+  "history_start": "2025-10-01",
+  "fx": "EURUSD=X",
+  "assets": [
+    {"ticker": "NVDA",    "name": "Nvidia",            "group": "Leaders cash",        "ccy": "USD"},
+    {"ticker": "TSM",     "name": "TSMC (ADR)",        "group": "Leaders cash",        "ccy": "USD"},
+    {"ticker": "GOOGL",   "name": "Alphabet",          "group": "Leaders cash",        "ccy": "USD"},
+    {"ticker": "MSFT",    "name": "Microsoft",         "group": "Leaders cash",        "ccy": "USD"},
+    {"ticker": "AMZN",    "name": "Amazon",            "group": "Hyperscalers",        "ccy": "USD"},
+    {"ticker": "META",    "name": "Meta",              "group": "Hyperscalers",        "ccy": "USD"},
+    {"ticker": "AVGO",    "name": "Broadcom",          "group": "Semi-conducteurs",    "ccy": "USD"},
+    {"ticker": "AMD",     "name": "AMD",               "group": "Valorisations extrêmes", "ccy": "USD"},
+    {"ticker": "PLTR",    "name": "Palantir",          "group": "Valorisations extrêmes", "ccy": "USD"},
+    {"ticker": "ORCL",    "name": "Oracle",            "group": "Endettés IA",         "ccy": "USD"},
+    {"ticker": "CRWV",    "name": "CoreWeave",         "group": "Endettés IA",         "ccy": "USD"},
+    {"ticker": "NBIS",    "name": "Nebius",            "group": "Endettés IA",         "ccy": "USD"},
+    {"ticker": "SU.PA",   "name": "Schneider Electric","group": "Pelles & pioches",    "ccy": "EUR"},
+    {"ticker": "ENR.DE",  "name": "Siemens Energy",    "group": "Pelles & pioches",    "ccy": "EUR"},
+    {"ticker": "LR.PA",   "name": "Legrand",           "group": "Pelles & pioches",    "ccy": "EUR"},
+    {"ticker": "ASML.AS", "name": "ASML",              "group": "Pelles & pioches",    "ccy": "EUR"},
+    {"ticker": "^NDX",    "name": "Nasdaq-100",        "group": "Indices",             "ccy": "USD"},
+    {"ticker": "^SOX",    "name": "Semi-conducteurs (SOX)", "group": "Indices",        "ccy": "USD"},
+    {"ticker": "^GSPC",   "name": "S&P 500",           "group": "Indices",             "ccy": "USD"},
+    {"ticker": "URTH",    "name": "ETF MSCI World",    "group": "Indices",             "ccy": "USD"},
+    {"ticker": "^VIX",    "name": "VIX (peur)",        "group": "Signaux",             "ccy": "PTS"},
+    {"ticker": "^TNX",    "name": "Taux US 10 ans",    "group": "Signaux",             "ccy": "PCT10"},
+    {"ticker": "HYG",     "name": "ETF crédit High Yield", "group": "Signaux",         "ccy": "USD"},
+    {"ticker": "EURUSD=X","name": "EUR/USD",           "group": "Signaux",             "ccy": "FX"}
+  ]
+}

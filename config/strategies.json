@@ -1,0 +1,26 @@
+{
+  "capital_eur": 10000,
+  "strategies": [
+    {"id": "leaders", "name": "Leaders qui encaissent", "platform": "Trade Republic",
+     "type": "basket", "weights": {"NVDA": 0.25, "TSM": 0.25, "GOOGL": 0.25, "MSFT": 0.25},
+     "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit."},
+    {"id": "pelles", "name": "Pelles & pioches (PEA)", "platform": "Trade Republic (PEA)",
+     "type": "basket", "weights": {"SU.PA": 0.25, "ENR.DE": 0.25, "LR.PA": 0.25, "ASML.AS": 0.25},
+     "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA."},
+    {"id": "pair", "name": "Pair trade Nvidia / CoreWeave", "platform": "Axi (CFD)",
+     "type": "pair", "long": "NVDA", "short": "CRWV", "long_notional": 10000, "short_notional": 5000,
+     "financing_long_annual": 0.065, "financing_short_annual": 0.02,
+     "stop_loss_pct_capital": -0.10,
+     "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2)."},
+    {"id": "hedged", "name": "Leaders + couverture NAS100", "platform": "Trade Republic + Axi",
+     "type": "hedged", "base": "leaders", "hedge": "^NDX", "hedge_ratio": 0.40, "financing_short_annual": 0.0,
+     "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part)."},
+    {"id": "paliers", "name": "Leaders achetés par paliers", "platform": "Trade Republic",
+     "type": "dca", "base_weights_from": "leaders", "tranches": ["2026-10-30", "2026-12-01", "2027-01-04"],
+     "thesis": "3 achats égaux sur 2 mois : on renonce au meilleur prix pour éviter le pire timing."}
+  ],
+  "benchmarks": [
+    {"id": "bench_world", "name": "ETF MSCI World", "ticker": "URTH"},
+    {"id": "bench_ndx", "name": "Nasdaq-100", "ticker": "^NDX"}
+  ]
+}
