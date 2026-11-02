@@ -180,8 +180,8 @@
    "op": ">",
    "value": 350,
    "action": "Renforcer la couverture NAS100 et le short CoreWeave",
-   "current": 288.0,
-   "as_of": "2026-10-15",
+   "current": 315.0,
+   "as_of": "2026-10-19",
    "triggered": false,
    "id": "CDS 5 ans Oracle > 350"
   },
@@ -190,8 +190,8 @@
    "op": "<",
    "value": 220,
    "action": "Alléger la couverture, renforcer le cœur",
-   "current": 288.0,
-   "as_of": "2026-10-15",
+   "current": 315.0,
+   "as_of": "2026-10-19",
    "triggered": false,
    "id": "CDS 5 ans Oracle < 220"
   },
@@ -200,8 +200,8 @@
    "op": ">",
    "value": 1200,
    "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)",
-   "current": 1000.0,
-   "as_of": "2026-10-15",
+   "current": 1090.0,
+   "as_of": "2026-10-20",
    "triggered": false,
    "id": "CDS 5 ans CoreWeave > 1200"
   },
@@ -232,8 +232,28 @@
    "label": "Résultats Palantir"
   },
   {
+   "date": "2026-11-02",
+   "label": "Résultats Apple"
+  },
+  {
    "date": "2026-11-03",
    "label": "Résultats AMD"
+  },
+  {
+   "date": "2026-11-03",
+   "label": "Élections de mi-mandat américaines"
+  },
+  {
+   "date": "2026-11-03",
+   "label": "Résultats Super Micro"
+  },
+  {
+   "date": "2026-11-04",
+   "label": "Résultats Arm et Qualcomm"
+  },
+  {
+   "date": "2026-11-06",
+   "label": "Rapport sur l'emploi américain (octobre)"
   },
   {
    "date": "2026-11-16",
