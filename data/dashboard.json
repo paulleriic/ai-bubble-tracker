@@ -10,9 +10,9 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 10076.67,
-   "pnl": 76.67,
-   "pnl_pct": 0.00767,
+   "value": 10102.48,
+   "pnl": 102.48,
+   "pnl_pct": 0.01025,
    "max_drawdown": -0.01332
   },
   {
@@ -34,9 +34,9 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 10331.71,
-   "pnl": 331.71,
-   "pnl_pct": 0.03317,
+   "value": 10345.39,
+   "pnl": 345.39,
+   "pnl_pct": 0.03454,
    "max_drawdown": -0.0116
   },
   {
@@ -46,9 +46,9 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 10088.25,
-   "pnl": 88.25,
-   "pnl_pct": 0.00882,
+   "value": 10103.84,
+   "pnl": 103.84,
+   "pnl_pct": 0.01038,
    "max_drawdown": -0.00867
   },
   {
@@ -58,9 +58,9 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 10025.56,
-   "pnl": 25.56,
-   "pnl_pct": 0.00256,
+   "value": 10034.16,
+   "pnl": 34.16,
+   "pnl_pct": 0.00342,
    "max_drawdown": -0.00444
   },
   {
@@ -70,9 +70,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 10109.8,
-   "pnl": 109.8,
-   "pnl_pct": 0.01098,
+   "value": 10135.7,
+   "pnl": 135.7,
+   "pnl_pct": 0.01357,
    "max_drawdown": -0.00259
   },
   {
@@ -82,9 +82,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 9971.05,
-   "pnl": -28.95,
-   "pnl_pct": -0.0029,
+   "value": 9996.59,
+   "pnl": -3.41,
+   "pnl_pct": -0.00034,
    "max_drawdown": -0.01162
   }
  ],
@@ -96,9 +96,9 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 10229.52,
-   "pnl": 229.52,
-   "pnl_pct": 0.02295,
+   "value": 10255.73,
+   "pnl": 255.73,
+   "pnl_pct": 0.02557,
    "max_drawdown": -0.13597
   },
   {
@@ -120,9 +120,9 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 11578.84,
-   "pnl": 1578.84,
-   "pnl_pct": 0.15788,
+   "value": 11596.2,
+   "pnl": 1596.2,
+   "pnl_pct": 0.15962,
    "max_drawdown": -0.13736
   },
   {
@@ -132,9 +132,9 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 10103.5,
-   "pnl": 103.5,
-   "pnl_pct": 0.01035,
+   "value": 10119.13,
+   "pnl": 119.13,
+   "pnl_pct": 0.01191,
    "max_drawdown": -0.102
   },
   {
@@ -144,9 +144,9 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 9769.54,
-   "pnl": -230.46,
-   "pnl_pct": -0.02305,
+   "value": 9794.56,
+   "pnl": -205.44,
+   "pnl_pct": -0.02054,
    "max_drawdown": -0.13719
   },
   {
@@ -156,9 +156,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 10482.88,
-   "pnl": 482.88,
-   "pnl_pct": 0.04829,
+   "value": 10509.74,
+   "pnl": 509.74,
+   "pnl_pct": 0.05097,
    "max_drawdown": -0.03535
   },
   {
@@ -168,9 +168,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 10315.06,
-   "pnl": 315.06,
-   "pnl_pct": 0.03151,
+   "value": 10341.49,
+   "pnl": 341.49,
+   "pnl_pct": 0.03415,
    "max_drawdown": -0.09876
   }
  ],
@@ -219,7 +219,7 @@
    "indicator": "Pair trade (perte / capital)",
    "op": "<",
    "value": -0.1,
-   "current": 0.03317,
+   "current": 0.03454,
    "as_of": "2026-11-04",
    "triggered": false,
    "action": "Stop-loss : couper le pair trade",
