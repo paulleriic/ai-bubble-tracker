@@ -26,10 +26,7 @@ Tableau de bord : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf (type Dashbo
 | `data/dash/fundamentals.json` | `datasets/fundamentals` |
 
    Pour chacun : téléverser le fichier comme asset de l'artifact (Artifact, `asset: true`, un appel par fichier JSON), lire le document du jeu de données, puis faire un `update` (avec `if_version`) de `source.url`, `source.name` et `updated: {at, by}`. Ensuite, supprimer l'ancien asset (son id = les 32 caractères après `/_blob/` dans l'ancienne url).
-4. Envoyer le point du jour sur Telegram via le bot du repo `paulleriic/inli` :
-   - `python3 scripts/telegram_message.py` (ajouter `--monday` le lundi) écrit le message dans `data/telegram.html` ;
-   - déclencher le workflow `notify.yml` du repo inli : `POST repos/paulleriic/inli/actions/workflows/notify.yml/dispatches` avec `{"ref": "main", "inputs": {"message": <contenu de data/telegram.html>, "button_url": "https://paulleriic.github.io/ai-bubble-tracker/", "button_text": "Ouvrir le tableau de bord"}}` (ajouter `add_repo` paulleriic/inli en accès push) ;
-   - vérifier que le run se termine en succès.
+4. Le message Telegram est envoyé chaque soir par le workflow GitHub (étape « Message Telegram du soir », secrets `TELEGRAM_BOT_TOKEN` et `TELEGRAM_CHAT_ID` du repo). Ne rien envoyer depuis la routine.
 5. Si une règle de `data/dash/alerts.json` passe à `triggered: true`, le message Telegram le signale déjà ; le dire aussi dans la réponse de la session.
 
 ## Le lundi, en plus : la newsletter
@@ -39,4 +36,4 @@ Tableau de bord : https://claude.ai/artifact/2yc1SDPvQVvpVnHM7qCVtf (type Dashbo
 3. Mettre à jour `config/thresholds.json` (`events`) avec les nouvelles dates connues.
 4. Relancer `scripts/compute.py`, puis l'étape 3 ci-dessus.
 5. Rédiger `newsletters/AAAA-MM-JJ.md` sur le modèle de la précédente : en une phrase, chiffres de la semaine, crédit et Fed, règles déclenchées, stratégies (suivi réel et rétro-test), ce qu'on apprend, à surveiller, sources.
-6. Relancer `scripts/compute.py` (pour inclure la nouvelle lettre dans `data/dash/newsletters.json`), refaire l'étape 3, commit et push sur `main`, puis l'étape 4 avec `--monday`.
+6. Relancer `scripts/compute.py` (pour inclure la nouvelle lettre dans `data/dash/newsletters.json`), refaire l'étape 3, commit et push sur `main`, (le message du soir signalera la nouvelle lettre).

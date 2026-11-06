@@ -25,6 +25,15 @@ jobs:
       - run: python scripts/fetch_fundamentals.py || echo 'fondamentaux indisponibles'
       - run: python scripts/compute.py
       - run: python scripts/build_site.py
+      - name: Message Telegram du soir
+        if: github.event_name == 'schedule'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          pip install requests
+          if [ "$(TZ=Europe/Paris date +%u)" = "1" ]; then python scripts/telegram_message.py --monday; else python scripts/telegram_message.py; fi
+          python scripts/send_telegram.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
