@@ -10,3 +10,9 @@ date,indicator,value,unit,source,note
 2026-10-20,CDS 5 ans CoreWeave,1090,pb,https://fourweekmba.com/ai-softbank-credit-risk-hits-4-year-high-on-ai-funding-strain/,Environ 1 090 pb selon le FT cité par FourWeekMBA ; relevé indirect
 2026-10-20,CDS 5 ans SoftBank,432,pb,https://fourweekmba.com/ai-softbank-credit-risk-hits-4-year-high-on-ai-funding-strain/,Plus haut depuis novembre 2022
 2026-10-28,Proba hausse Fed 9 déc.,85,%,https://pomegra.io/news/fed-rate-held-at-375-400-as-warsh-keeps-december-open,CME FedWatch juste après le statu quo du 28/10 (78 % la veille)
+2026-11-05,CDS 5 ans CoreWeave,1289,pb,https://247wallst.com/investing/2026/11/07/coreweaves-bonds-now-yield-more-than-16-days-before-earnings/,Au-dessus de 1 289 pb le 5/11 : seuil de 1 200 pb franchi en séance
+2026-11-06,CDS 5 ans CoreWeave,1155,pb,https://247wallst.com/investing/2026/11/07/coreweaves-bonds-now-yield-more-than-16-days-before-earnings/,Environ 1 155 pb (repli d'environ 8 % sur la veille)
+2026-11-06,Rendement obligations CoreWeave,16,%,https://247wallst.com/investing/2026/11/07/coreweaves-bonds-now-yield-more-than-16-days-before-earnings/,"Obligation 2032 (coupon 9,625 %) au-dessus de 16 %"
+2026-11-06,CDS 5 ans Oracle,298,pb,https://247wallst.com/investing/2026/11/07/coreweaves-bonds-now-yield-more-than-16-days-before-earnings/,Près de 298 pb (article du 7/11 ; date exacte du relevé non précisée)
+2026-11-06,CDS 5 ans SoftBank,457.5,pb,https://www.thestar.com.my/tech/tech-news/2026/11/06/softbank-credit-risk-jumps-to-4-year-high-as-ai-fears-roil-market,"Markit (Reuters) ; pic à 466 pb en séance, plus haut depuis octobre 2022"
+2026-11-06,Proba hausse Fed 9 déc.,76.8,%,https://www.webull.com/news/15883683924537344,"CME FedWatch après l'emploi d'octobre (+165 000 ; chômage 4,1 %) ; 66,9 % une semaine plus tôt selon la même source"

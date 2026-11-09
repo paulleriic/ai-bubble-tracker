@@ -180,8 +180,8 @@
    "op": ">",
    "value": 350,
    "action": "Renforcer la couverture NAS100 et le short CoreWeave",
-   "current": 315.0,
-   "as_of": "2026-10-19",
+   "current": 298.0,
+   "as_of": "2026-11-06",
    "triggered": false,
    "id": "CDS 5 ans Oracle > 350"
   },
@@ -190,8 +190,8 @@
    "op": "<",
    "value": 220,
    "action": "Alléger la couverture, renforcer le cœur",
-   "current": 315.0,
-   "as_of": "2026-10-19",
+   "current": 298.0,
+   "as_of": "2026-11-06",
    "triggered": false,
    "id": "CDS 5 ans Oracle < 220"
   },
@@ -200,8 +200,8 @@
    "op": ">",
    "value": 1200,
    "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)",
-   "current": 1090.0,
-   "as_of": "2026-10-20",
+   "current": 1155.0,
+   "as_of": "2026-11-06",
    "triggered": false,
    "id": "CDS 5 ans CoreWeave > 1200"
   },
@@ -210,8 +210,8 @@
    "op": ">",
    "value": 80,
    "action": "Prudence sur les valeurs de croissance (effet duration)",
-   "current": 71.0,
-   "as_of": "2026-10-30",
+   "current": 76.8,
+   "as_of": "2026-11-06",
    "triggered": false,
    "id": "Proba hausse Fed 9 déc. > 80"
   },
@@ -254,6 +254,18 @@
   {
    "date": "2026-11-06",
    "label": "Rapport sur l'emploi américain (octobre)"
+  },
+  {
+   "date": "2026-11-10",
+   "label": "Résultats CoreWeave (après la clôture)"
+  },
+  {
+   "date": "2026-11-10",
+   "label": "Résultats SoftBank"
+  },
+  {
+   "date": "2026-11-10",
+   "label": "Inflation américaine (CPI d'octobre)"
   },
   {
    "date": "2026-11-16",
