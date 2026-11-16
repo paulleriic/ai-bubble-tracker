@@ -210,9 +210,9 @@
    "op": ">",
    "value": 80,
    "action": "Prudence sur les valeurs de croissance (effet duration)",
-   "current": 76.8,
-   "as_of": "2026-11-06",
-   "triggered": false,
+   "current": 100.0,
+   "as_of": "2026-11-10",
+   "triggered": true,
    "id": "Proba hausse Fed 9 déc. > 80"
   },
   {
@@ -273,7 +273,7 @@
   },
   {
    "date": "2026-11-17",
-   "label": "Résultats Nvidia"
+   "label": "Résultats Nvidia (après la clôture)"
   },
   {
    "date": "2026-11-20",
