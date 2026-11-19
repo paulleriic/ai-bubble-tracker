@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-17",
+ "as_of": "2026-11-18",
  "start": "2026-10-30",
  "capital_eur": 10000,
  "strategies": [
@@ -10,10 +10,10 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9193.24,
-   "pnl": -806.76,
-   "pnl_pct": -0.08068,
-   "max_drawdown": -0.09
+   "value": 9190.46,
+   "pnl": -809.54,
+   "pnl_pct": -0.08095,
+   "max_drawdown": -0.09028
   },
   {
    "id": "pelles",
@@ -22,9 +22,9 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9975.44,
-   "pnl": -24.56,
-   "pnl_pct": -0.00246,
+   "value": 9686.12,
+   "pnl": -313.88,
+   "pnl_pct": -0.03139,
    "max_drawdown": -0.08219
   },
   {
@@ -34,9 +34,9 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 8064.77,
-   "pnl": -1935.23,
-   "pnl_pct": -0.19352,
+   "value": 8031.48,
+   "pnl": -1968.52,
+   "pnl_pct": -0.19685,
    "max_drawdown": -0.23339
   },
   {
@@ -46,10 +46,10 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9324.27,
-   "pnl": -675.73,
-   "pnl_pct": -0.06757,
-   "max_drawdown": -0.07716
+   "value": 9303.21,
+   "pnl": -696.79,
+   "pnl_pct": -0.06968,
+   "max_drawdown": -0.07924
   },
   {
    "id": "paliers",
@@ -58,10 +58,10 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9731.08,
-   "pnl": -268.92,
-   "pnl_pct": -0.02689,
-   "max_drawdown": -0.0302
+   "value": 9730.15,
+   "pnl": -269.85,
+   "pnl_pct": -0.02698,
+   "max_drawdown": -0.0303
   },
   {
    "id": "bench_world",
@@ -70,9 +70,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 9874.21,
-   "pnl": -125.79,
-   "pnl_pct": -0.01258,
+   "value": 9828.78,
+   "pnl": -171.22,
+   "pnl_pct": -0.01712,
    "max_drawdown": -0.04201
   },
   {
@@ -82,9 +82,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 9672.42,
-   "pnl": -327.58,
-   "pnl_pct": -0.03276,
+   "value": 9718.13,
+   "pnl": -281.87,
+   "pnl_pct": -0.02819,
    "max_drawdown": -0.06618
   }
  ],
@@ -96,10 +96,10 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 9288.73,
-   "pnl": -711.27,
-   "pnl_pct": -0.07113,
-   "max_drawdown": -0.1976
+   "value": 9281.54,
+   "pnl": -718.46,
+   "pnl_pct": -0.07185,
+   "max_drawdown": -0.19823
   },
   {
    "id": "pelles",
@@ -108,9 +108,9 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 9125.12,
-   "pnl": -874.88,
-   "pnl_pct": -0.08749,
+   "value": 8857.87,
+   "pnl": -1142.13,
+   "pnl_pct": -0.11421,
    "max_drawdown": -0.22183
   },
   {
@@ -120,10 +120,10 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 9257.26,
-   "pnl": -742.74,
-   "pnl_pct": -0.07427,
-   "max_drawdown": -0.22449
+   "value": 9172.57,
+   "pnl": -827.43,
+   "pnl_pct": -0.08274,
+   "max_drawdown": -0.23158
   },
   {
    "id": "hedged",
@@ -132,10 +132,10 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 9286.28,
-   "pnl": -713.72,
-   "pnl_pct": -0.07137,
-   "max_drawdown": -0.15871
+   "value": 9260.17,
+   "pnl": -739.83,
+   "pnl_pct": -0.07398,
+   "max_drawdown": -0.16108
   },
   {
    "id": "paliers",
@@ -144,10 +144,10 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8889.89,
-   "pnl": -1110.11,
-   "pnl_pct": -0.11101,
-   "max_drawdown": -0.19697
+   "value": 8885.55,
+   "pnl": -1114.45,
+   "pnl_pct": -0.11144,
+   "max_drawdown": -0.19736
   },
   {
    "id": "bench_world",
@@ -156,9 +156,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 10238.6,
-   "pnl": 238.6,
-   "pnl_pct": 0.02386,
+   "value": 10191.49,
+   "pnl": 191.49,
+   "pnl_pct": 0.01915,
    "max_drawdown": -0.05191
   },
   {
@@ -168,9 +168,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 10006.13,
-   "pnl": 6.13,
-   "pnl_pct": 0.00061,
+   "value": 10053.41,
+   "pnl": 53.41,
+   "pnl_pct": 0.00534,
    "max_drawdown": -0.14851
   }
  ],
@@ -219,8 +219,8 @@
    "indicator": "Pair trade (perte / capital)",
    "op": "<",
    "value": -0.1,
-   "current": -0.19352,
-   "as_of": "2026-11-17",
+   "current": -0.19685,
+   "as_of": "2026-11-18",
    "triggered": true,
    "action": "Stop-loss : couper le pair trade",
    "id": "Pair trade (perte / capital) < -0.1"
