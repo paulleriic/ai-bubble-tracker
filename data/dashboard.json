@@ -22,10 +22,10 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": NaN,
-   "pnl": NaN,
-   "pnl_pct": NaN,
-   "max_drawdown": NaN
+   "value": 9752.63,
+   "pnl": -247.37,
+   "pnl_pct": -0.02474,
+   "max_drawdown": -0.08219
   },
   {
    "id": "pair",
@@ -108,10 +108,10 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": NaN,
-   "pnl": NaN,
-   "pnl_pct": NaN,
-   "max_drawdown": NaN
+   "value": 8921.69,
+   "pnl": -1078.31,
+   "pnl_pct": -0.10783,
+   "max_drawdown": -0.22183
   },
   {
    "id": "pair",
@@ -180,8 +180,8 @@
    "op": ">",
    "value": 350,
    "action": "Renforcer la couverture NAS100 et le short CoreWeave",
-   "current": 298.0,
-   "as_of": "2026-11-06",
+   "current": 327.9,
+   "as_of": "2026-11-20",
    "triggered": false,
    "id": "CDS 5 ans Oracle > 350"
   },
@@ -190,8 +190,8 @@
    "op": "<",
    "value": 220,
    "action": "Alléger la couverture, renforcer le cœur",
-   "current": 298.0,
-   "as_of": "2026-11-06",
+   "current": 327.9,
+   "as_of": "2026-11-20",
    "triggered": false,
    "id": "CDS 5 ans Oracle < 220"
   },
@@ -200,9 +200,9 @@
    "op": ">",
    "value": 1200,
    "action": "Risque de défaut élevé : surveiller la contagion (Oracle, Nvidia)",
-   "current": 1155.0,
-   "as_of": "2026-11-06",
-   "triggered": false,
+   "current": 1232.6,
+   "as_of": "2026-11-20",
+   "triggered": true,
    "id": "CDS 5 ans CoreWeave > 1200"
   },
   {
@@ -210,8 +210,8 @@
    "op": ">",
    "value": 80,
    "action": "Prudence sur les valeurs de croissance (effet duration)",
-   "current": 100.0,
-   "as_of": "2026-11-10",
+   "current": 96.9,
+   "as_of": "2026-11-20",
    "triggered": true,
    "id": "Proba hausse Fed 9 déc. > 80"
   },
@@ -273,11 +273,15 @@
   },
   {
    "date": "2026-11-17",
-   "label": "Résultats Nvidia (après la clôture)"
+   "label": "Résultats Nvidia (115,8 Md$ de CA, prévision 130 Md$)"
   },
   {
    "date": "2026-11-20",
    "label": "Échéance mensuelle des options"
+  },
+  {
+   "date": "2026-11-26",
+   "label": "Thanksgiving : bourse américaine fermée"
   },
   {
    "date": "2026-11-30",
