@@ -22,10 +22,10 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9752.63,
-   "pnl": -247.37,
-   "pnl_pct": -0.02474,
-   "max_drawdown": -0.08219
+   "value": 9213.45,
+   "pnl": -786.55,
+   "pnl_pct": -0.07865,
+   "max_drawdown": -0.10521
   },
   {
    "id": "pair",
@@ -108,10 +108,10 @@
    "thesis": "Électricité, réseaux et machines : nécessaires quel que soit le gagnant de l'IA.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8921.69,
-   "pnl": -1078.31,
-   "pnl_pct": -0.10783,
-   "max_drawdown": -0.22183
+   "value": 8424.55,
+   "pnl": -1575.45,
+   "pnl_pct": -0.15754,
+   "max_drawdown": -0.22927
   },
   {
    "id": "pair",
