@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-20",
+ "as_of": "2026-11-23",
  "start": "2026-10-30",
  "capital_eur": 10000,
  "strategies": [
@@ -10,9 +10,9 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 8349.92,
-   "pnl": -1650.08,
-   "pnl_pct": -0.16501,
+   "value": 9314.4,
+   "pnl": -685.6,
+   "pnl_pct": -0.06856,
    "max_drawdown": -0.17348
   },
   {
@@ -34,9 +34,9 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 7539.93,
-   "pnl": -2460.07,
-   "pnl_pct": -0.24601,
+   "value": 8682.53,
+   "pnl": -1317.47,
+   "pnl_pct": -0.13175,
    "max_drawdown": -0.27118
   },
   {
@@ -46,9 +46,9 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 8754.32,
-   "pnl": -1245.68,
-   "pnl_pct": -0.12457,
+   "value": 9472.75,
+   "pnl": -527.25,
+   "pnl_pct": -0.05273,
    "max_drawdown": -0.13357
   },
   {
@@ -58,9 +58,9 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-10-30",
-   "value": 9449.97,
-   "pnl": -550.03,
-   "pnl_pct": -0.055,
+   "value": 9771.47,
+   "pnl": -228.53,
+   "pnl_pct": -0.02285,
    "max_drawdown": -0.05822
   },
   {
@@ -70,9 +70,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 9336.93,
-   "pnl": -663.07,
-   "pnl_pct": -0.06631,
+   "value": 9724.88,
+   "pnl": -275.12,
+   "pnl_pct": -0.02751,
    "max_drawdown": -0.07881
   },
   {
@@ -82,9 +82,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-10-30",
-   "value": 8989.01,
-   "pnl": -1010.99,
-   "pnl_pct": -0.1011,
+   "value": 9604.12,
+   "pnl": -395.88,
+   "pnl_pct": -0.03959,
    "max_drawdown": -0.10512
   }
  ],
@@ -96,9 +96,9 @@
    "thesis": "Ceux qui financent leur capex avec leur cash survivent à tout scénario de crédit.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8426.23,
-   "pnl": -1573.77,
-   "pnl_pct": -0.15738,
+   "value": 9403.98,
+   "pnl": -596.02,
+   "pnl_pct": -0.0596,
    "max_drawdown": -0.27211
   },
   {
@@ -120,9 +120,9 @@
    "thesis": "Les solides font mieux que les endettés si le crédit se tend. Neutre au marché (bêta CRWV ≈ 2).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8454.45,
-   "pnl": -1545.55,
-   "pnl_pct": -0.15456,
+   "value": 9872.27,
+   "pnl": -127.73,
+   "pnl_pct": -0.01277,
    "max_drawdown": -0.29174
   },
   {
@@ -132,9 +132,9 @@
    "thesis": "Même cœur que « Leaders », avec un short Nasdaq-100 sur 40 % du montant (réassurance en quote-part).",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8706.57,
-   "pnl": -1293.43,
-   "pnl_pct": -0.12934,
+   "value": 9429.79,
+   "pnl": -570.21,
+   "pnl_pct": -0.05702,
    "max_drawdown": -0.21123
   },
   {
@@ -144,9 +144,9 @@
    "thesis": "3 achats égaux à 1 mois d'intervalle : on renonce au meilleur prix pour éviter le pire timing.",
    "kind": "strategy",
    "start": "2026-07-31",
-   "value": 8073.53,
-   "pnl": -1926.47,
-   "pnl_pct": -0.19265,
+   "value": 8998.55,
+   "pnl": -1001.45,
+   "pnl_pct": -0.10015,
    "max_drawdown": -0.27071
   },
   {
@@ -156,9 +156,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 9681.49,
-   "pnl": -318.51,
-   "pnl_pct": -0.03185,
+   "value": 10083.76,
+   "pnl": 83.76,
+   "pnl_pct": 0.00838,
    "max_drawdown": -0.08833
   },
   {
@@ -168,9 +168,9 @@
    "thesis": "",
    "kind": "benchmark",
    "start": "2026-07-31",
-   "value": 9299.14,
-   "pnl": -700.86,
-   "pnl_pct": -0.07009,
+   "value": 9935.47,
+   "pnl": -64.53,
+   "pnl_pct": -0.00645,
    "max_drawdown": -0.18034
   }
  ],
@@ -219,8 +219,8 @@
    "indicator": "Pair trade (perte / capital)",
    "op": "<",
    "value": -0.1,
-   "current": -0.24601,
-   "as_of": "2026-11-20",
+   "current": -0.13175,
+   "as_of": "2026-11-23",
    "triggered": true,
    "action": "Stop-loss : couper le pair trade",
    "id": "Pair trade (perte / capital) < -0.1"
